@@ -1,0 +1,96 @@
+@font-face {
+  font-family: "Elms Sans";
+  src: url("../assets/font/elms-sans/ElmsSans-Light.woff2") format("woff2");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Elms Sans";
+  src: url("../assets/font/elms-sans/ElmsSans-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Elms Sans";
+  src: url("../assets/font/elms-sans/ElmsSans-Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Noto Serif Display ";
+  src: url("../assets/fonts/noto-serif-display/NotoSerifDisplay-Regular.woff2")
+    format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Noto Serif Display";
+  src: url("../assets/fonts/noto-serif-display/NotoSerifDisplay-Medium.woff2")
+    format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+
+}
+
+
+
+@font-face {
+  font-family: "Notable";
+  src: url("../assets/fonts/notable/Notable-Regular.woff2") 
+  format("woff2");
+  font-weight: 700;
+  font-style: normal;
+
+}
+@font-face {
+  font-family: "Cinzel";
+  src: url("../assets/fonts/cinzel/Cinzel-Bold.woff2")
+   format("woff2");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Cinzel";
+  src: url("../assets/fonts/cinzel/Cinzel-Regular.woff2")
+   format("woff2");
+  font-weight: 700;
+  font-style: normal;
+}
+
+
+@font-face {
+  font-family: "Explora";
+  src: url("../assets/fonts/explora/Explora-Regular.woff2") 
+  format("woff2");
+  font-weight: 700;
+  font-style: normal;
+
+}
+
+@font-face {
+  font-family: "Roboto";
+  src: url("../assets/fonts/roboto/Roboto-Medium.woff2") 
+  format("woff2");
+  font-weight: 600;
+  font-style: normal;
+
+}
+
+@font-face {
+  font-family: "Semi Bold";
+  src: url("../assets/fonts/roboto/Roboto-SemiBold.woff2") 
+  format("woff2");
+  font-weight: 700;
+  font-style: normal;
+
+}

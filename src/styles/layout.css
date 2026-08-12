@@ -1,0 +1,4 @@
+.layout-container {
+  width: min(100% - 48px, 1440px);
+  margin-inline: auto;
+}

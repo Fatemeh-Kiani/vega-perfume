@@ -1,6 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
-  <!-- Left arm: full solid thick slab -->
-  <polygon points="90,48 152,48 210,352 148,352" fill="#ffffff"/>
-  <!-- Right arm: only the outer thin sliver — interior is background -->
-  <polygon points="282,48 308,48 218,352 210,352" fill="#ffffff"/>
-</svg>

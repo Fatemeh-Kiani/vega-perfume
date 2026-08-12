@@ -1,1 +1,74 @@
+@import "./styles/layout.css";
+@import "../src/styles/font.css";
 @import "tailwindcss";
+
+@theme {
+    --font-elms: "Elms Sans", sans-serif;
+--font-display: "Cinzel";
+--font-explora:"Explora",serif;
+--font-notable:"Notable";
+--font-notoSerif:"Noto Serif Display";
+--font-roboto:"Roboto";
+--font-semibold:" Semi Bold";
+
+/* Brand */
+--color-brand-sage: #BEBCA7;
+--color-brand-cream: #D9D1C4;
+
+/* Background */
+--color-background-main: #F6F3ED; 
+--color-background-soft: #F6F2EF;
+
+/* Text */
+--color-text-primary: #342D26;
+--color-text-secondary: #E3DCD3;
+--color-text-muted: #A49B90;
+
+/* Accent */
+--color-accent: #483B2E;
+
+
+--shadow-text: 0 2px 12px rgba(0, 0, 0, 0.6);
+--shadow-text-soft: 0 1px 8px rgba(0, 0, 0, 0.35);
+}
+  @layer base {
+
+  * {
+
+    @apply box-border;
+
+  }
+
+  html {
+
+    scroll-behavior: smooth;
+
+  }
+
+  body {
+
+    @apply bg-background-main text-text-primary;
+
+  }
+
+  img {
+
+    @apply block max-w-full;
+
+  }
+
+  button {
+
+    @apply cursor-pointer;
+
+  }
+
+  a {
+
+    @apply no-underline;
+
+    color: inherit;
+
+  }
+
+}

@@ -5,7 +5,6 @@ export interface Brand {
 
   slug: string;
 
-  logoId: number;
 
   description: string;
 

@@ -14,12 +14,18 @@ import gucci from "./brands/gucci.webp";
 import versace from "./brands/versace.webp";
 import ysl from "./brands/ysl.webp";
 import aesop from "./brands/aesop.webp";
+import diptyque from "./brands/diptyque.webp";
+import jivenchy from "./brands/jivenchy.webp";
+import penhaligons from "./brands/penhaligons.webp";
+
 
 import women from "./perfumes/women.webp";
 import men from "./perfumes/men.webp";
 import unisex from "./perfumes/unisex.webp";
 
 import floral from "./perfumes/floral.webp";
+import fresh from "./perfumes/fresh.webp";
+import citrus from "./perfumes/citrus.webp";
 import woody from "./perfumes/woody.webp";
 import amber from "./perfumes/amber.webp";
 import fruity from "./perfumes/fruity.webp";
@@ -59,6 +65,9 @@ export const Images = {
   versace,
   ysl,
   aesop,
+  diptyque,
+  penhaligons,
+  jivenchy,
 },
 
   perfumes: {
@@ -68,6 +77,8 @@ export const Images = {
   floral,
   woody,
   amber,
+  citrus,
+  fresh,
   fruity,
   aquatic,
   spring,

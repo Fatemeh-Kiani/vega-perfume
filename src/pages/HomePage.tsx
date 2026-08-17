@@ -1,53 +1,208 @@
-import { useRef } from "react";
-import { motion, useScroll, useTransform } from "motion/react";
+import { useEffect, useRef, useState } from "react";
+import {
+  motion,
+  animate,
+  useMotionValue,
+} from "motion/react";
+
 import Hero from "../components/Hero";
 import Header from "../components/navigation/Header";
-
+import FragranceSection from "../components/home/FragranceSection";
+import CategorySection from "../components/home/CategorySection";
+import BestSellersSection from "../components/home/BestSellersSection";
 
 export default function HomePage() {
-  const introRef = useRef(null);
+  const homeRef = useRef<HTMLElement>(null);
 
-  const { scrollYProgress } = useScroll({
-    target: introRef,
-    offset: ["start end", "start start"],
-  });
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isHomeVisible, setIsHomeVisible] =
+    useState(false);
 
-  const y = useTransform(scrollYProgress, [0, 1], [120, 0]);
-  const borderRadius = useTransform(
-  scrollYProgress,
-  [0, 1],
-  [40, 0]
-);
+  const isAnimating = useRef(false);
+
+  const wasAtTop = useRef(false);
+
+  const homeY = useMotionValue("100%");
+
+  /* --------------------------------
+     SHOW HOME
+  -------------------------------- */
+
+  const showHome = () => {
+    if (isAnimating.current) return;
+
+    isAnimating.current = true;
+
+    setIsHomeVisible(true);
+
+    animate(homeY, "0%", {
+      duration: 0.5,
+      ease: [0.75, 0.75, 0.75, 0.75],
+
+      onComplete: () => {
+        isAnimating.current = false;
+      },
+    });
+  };
+
+  /* --------------------------------
+     SHOW HERO
+  -------------------------------- */
+
+  const showHero = () => {
+    if (isAnimating.current) return;
+
+    isAnimating.current = true;
+
+    animate(homeY, "100%", {
+      duration: 0.5,
+      ease: [0.75, 0.75, 0.75, 0.75],
+
+      onComplete: () => {
+        setIsHomeVisible(false);
+
+        isAnimating.current = false;
+      },
+    });
+  };
+
+  /* --------------------------------
+     WHEEL CONTROL
+  -------------------------------- */
+
+  useEffect(() => {
+    const handleExploreCollection = () => {
+      showHome();
+    };
+
+    const handleWheel = (event: WheelEvent) => {
+      if (isAnimating.current) {
+        event.preventDefault();
+        return;
+      }
+
+      /* --------------------------------
+         HERO → HOME
+      -------------------------------- */
+
+      if (!isHomeVisible) {
+        if (event.deltaY > 30) {
+          event.preventDefault();
+
+          showHome();
+        }
+
+        return;
+      }
+
+      const home = homeRef.current;
+
+      if (!home) return;
+
+
+      const isAtTop = home.scrollTop <= 2;
+
+      if (isAtTop && event.deltaY < -30) {
+        if (!wasAtTop.current) {
+          wasAtTop.current = true;
+          return;
+        }
+
+        event.preventDefault();
+
+        wasAtTop.current = false;
+
+        showHero();
+
+        return;
+      }
+
+      if (!isAtTop) {
+        wasAtTop.current = false;
+      }
+    };
+
+    window.addEventListener(
+      "vega:open-home",
+      handleExploreCollection
+    );
+
+    window.addEventListener("wheel", handleWheel, {
+      passive: false,
+    });
+
+    return () => {
+      window.removeEventListener(
+        "vega:open-home",
+        handleExploreCollection
+      );
+
+      window.removeEventListener(
+        "wheel",
+        handleWheel
+      );
+    };
+  }, [isHomeVisible]);
 
   return (
-    
-    <main className="relative">
+    <main
+      className="
+        relative
+        h-screen
+        overflow-hidden
+      "
+    >
+      {/* HERO*/}
 
       <Hero />
-      
+
+      {/* HOME*/}
 
       <motion.section
-        ref={introRef}
-        id="intro"
+        ref={homeRef}
         style={{
-          y,
-          borderTopLeftRadius: borderRadius,
-          borderTopRightRadius: borderRadius,
+          y: homeY,
         }}
- 
         className="
-          relative
+          fixed
+          inset-0
           z-20
-          min-h-screen
-         bg-background-main
-          shadow-2xl
-           shadow-[0_-30px_80px_rgba(0,0,0,0.20)]
+          h-screen
+          overflow-y-auto
+          overscroll-contain
+          bg-background-main
+          shadow-[0_-30px_80px_rgba(0,0,0,0.20)]
         "
       >
-    <Header />
-    <div className="h-[3000px]" />
+        <Header
+          onMenuOpenChange={setIsMenuOpen}
+        />
+
+        <div className="relative">
+          {/* --------------------------------
+              MENU OVERLAY
+          -------------------------------- */}
+
+          {isMenuOpen && (
+            <div
+              className="
+                pointer-events-none
+                absolute
+                inset-0
+                z-30
+                bg-black/35
+              "
+            />
+          )}
+
+
+          <FragranceSection />
+          <CategorySection/>
+          <BestSellersSection />
+
+          <div className="h-[3000px]" />
+        </div>
       </motion.section>
-    
     </main>
   );
 }

@@ -1,5 +1,10 @@
-import { useEffect, useState } from "react";
+import {
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { megaMenu } from "../../../data/megaMenu";
+import { motion } from "motion/react";
 
 type MegaMenuProps = {
   activeMenu: string | null;
@@ -22,41 +27,64 @@ function MenuLink({
       className="
         group
         relative
+        flex
         w-fit
+        items-center
+        font-notoSerif
+        text-[13px]
+        font-normal
+        leading-[1.25]
         text-text-primary
+        transition-colors
+- hover:text-text-primary/55
+
       "
     >
-      {label}
-
       <span
         className="
-          absolute
-          -bottom-0.5
-          left-1/2
-          h-px
-          w-0
-          bg-text-primary
-          transition-all
-          duration-300
-          group-hover:left-0
-          group-hover:w-full
+          relative
+          w-fit
         "
-      />
+      >
+        {label}
+
+        <span
+          className="
+            absolute
+            -bottom-[4px]
+            left-1/2
+            h-px
+            w-0
+            -translate-x-1/2
+            bg-text-primary
+            transition-all
+            duration-300
+            ease-out
+            group-hover:w-full
+          "
+        />
+      </span>
     </a>
   );
 }
 
 const sectionTitleClass = `
-  text-[13px]
-  font-medium
-  text-text-muted
+  mb-4
+  flex
+  items-center
+  gap-3
   font-roboto
+  text-[10px]
+  font-medium
+  uppercase
+  tracking-[0.18em]
+  text-text-muted
 `;
 
 const linkListClass = `
   flex
   flex-col
-  gap-1
+  gap-[9px]
 `;
 
 export default function MegaMenu({
@@ -67,15 +95,38 @@ export default function MegaMenu({
     (item) => item.id === activeMenu
   );
 
-  const [activeImage, setActiveImage] =
-    useState<string | null>(null);
-
   const [perfumeImages, setPerfumeImages] =
     useState<Record<string, string>>({});
 
-  /* --------------------------------
-     Initial perfume images
-  -------------------------------- */
+  const [activeImage, setActiveImage] =
+    useState<string | null>(null);
+
+    const closeTimeoutRef =
+  useRef<number | null>(null);
+
+  const cancelClose = () => {
+  if (closeTimeoutRef.current !== null) {
+    window.clearTimeout(
+      closeTimeoutRef.current
+    );
+
+    closeTimeoutRef.current = null;
+  }
+};
+
+const handleMouseLeave = () => {
+  closeTimeoutRef.current =
+    window.setTimeout(() => {
+      onClose();
+      closeTimeoutRef.current = null;
+    }, 180);
+};
+
+  /*
+   * --------------------------------
+   * INITIAL PERFUME IMAGES
+   * --------------------------------
+   */
 
   useEffect(() => {
     if (activeMenu !== "perfumes") return;
@@ -93,9 +144,11 @@ export default function MegaMenu({
     setPerfumeImages(images);
   }, [activeMenu, menu]);
 
-  /* --------------------------------
-     Initial brand image
-  -------------------------------- */
+  /*
+   * --------------------------------
+   * INITIAL BRAND IMAGE
+   * --------------------------------
+   */
 
   useEffect(() => {
     if (activeMenu !== "brands") return;
@@ -108,9 +161,40 @@ export default function MegaMenu({
 
   if (!menu) return null;
 
-  /* --------------------------------
-     PERFUMES
-  -------------------------------- */
+  /*
+   * --------------------------------
+   * ANIMATED IMAGE
+   * --------------------------------
+   */
+
+  function AnimatedImage({
+    src,
+    alt,
+    className = "",
+  }: {
+    src: string | null;
+    alt: string;
+    className?: string;
+  }) {
+    return (
+      <img
+        src={src ?? ""}
+        alt={alt}
+        className={`
+          h-full
+          w-full
+          object-cover
+          ${className}
+        `}
+      />
+    );
+  }
+
+  /*
+   * --------------------------------
+   * PERFUMES
+   * --------------------------------
+   */
 
   const renderPerfumes = () => (
     <div
@@ -120,7 +204,7 @@ export default function MegaMenu({
         items-start
         w-fit
         mx-auto
-      "
+    "
     >
       {menu.sections?.map((section, index) => (
         <div
@@ -133,7 +217,7 @@ export default function MegaMenu({
             px-6
             ${
               index !== menu.sections!.length - 1
-                ? "border-r border-black/20"
+                ? "border-r border-black/10"
                 : ""
             }
           `}
@@ -148,9 +232,24 @@ export default function MegaMenu({
               bg-background-soft
             "
           >
-            {perfumeImages[section.title] && (
+            <motion.div
+              key={perfumeImages[section.title]}
+              initial={{
+                opacity: 0,
+              }}
+              animate={{
+                opacity: 1,
+              }}
+              transition={{
+                duration: 0.28,
+                ease: "easeOut",
+              }}
+              className="h-full w-full"
+            >
               <img
-                src={perfumeImages[section.title]}
+                src={
+                  perfumeImages[section.title] ?? ""
+                }
                 alt={section.title}
                 className="
                   h-full
@@ -158,7 +257,7 @@ export default function MegaMenu({
                   object-cover
                 "
               />
-            )}
+            </motion.div>
           </div>
 
           {/* TITLE + ITEMS */}
@@ -167,10 +266,13 @@ export default function MegaMenu({
             className="
               flex
               flex-col
-              gap-3
             "
           >
-            <h3 className={sectionTitleClass}>
+            <h3
+              className={sectionTitleClass}
+            >
+
+
               {section.title}
             </h3>
 
@@ -185,7 +287,8 @@ export default function MegaMenu({
 
                     setPerfumeImages((prev) => ({
                       ...prev,
-                      [section.title]: item.image!,
+                      [section.title]:
+                        item.image!,
                     }));
                   }}
                 />
@@ -197,9 +300,11 @@ export default function MegaMenu({
     </div>
   );
 
-  /* --------------------------------
-     BODY
-  -------------------------------- */
+  /*
+   * --------------------------------
+   * BODY
+   * --------------------------------
+   */
 
   const renderImageSections = () => (
     <div
@@ -222,7 +327,7 @@ export default function MegaMenu({
             px-6
             ${
               index !== menu.sections!.length - 1
-                ? "border-r border-black/20"
+                ? "border-r border-black/10"
                 : ""
             }
           `}
@@ -248,6 +353,10 @@ export default function MegaMenu({
                   h-full
                   w-full
                   object-cover
+                  transition-transform
+                  duration-700
+                  ease-out
+                  hover:scale-[1.03]
                 "
               />
             </div>
@@ -259,10 +368,10 @@ export default function MegaMenu({
             className="
               flex
               flex-col
-              gap-3
             "
           >
             <h3 className={sectionTitleClass}>
+
               {section.title}
             </h3>
 
@@ -281,9 +390,11 @@ export default function MegaMenu({
     </div>
   );
 
-  /* --------------------------------
-     GIFTS
-  -------------------------------- */
+  /*
+   * --------------------------------
+   * GIFTS
+   * --------------------------------
+   */
 
   const renderGift = () => (
     <div
@@ -306,7 +417,7 @@ export default function MegaMenu({
             px-6
             ${
               index !== menu.sections!.length - 1
-                ? "border-r border-black/20"
+                ? "border-r border-black/10"
                 : ""
             }
           `}
@@ -332,6 +443,10 @@ export default function MegaMenu({
                   h-full
                   w-full
                   object-cover
+                  transition-transform
+                  duration-700
+                  ease-out
+                  hover:scale-[1.03]
                 "
               />
             </div>
@@ -343,10 +458,10 @@ export default function MegaMenu({
             className="
               flex
               flex-col
-              gap-3
             "
           >
             <h3 className={sectionTitleClass}>
+
               {section.title}
             </h3>
 
@@ -365,9 +480,11 @@ export default function MegaMenu({
     </div>
   );
 
-  /* --------------------------------
-     HOME
-  -------------------------------- */
+  /*
+   * --------------------------------
+   * HOME
+   * --------------------------------
+   */
 
   const renderHome = () => {
     const items =
@@ -393,7 +510,7 @@ export default function MegaMenu({
               px-6
               ${
                 index !== items.length - 1
-                  ? "border-r border-black/20"
+                  ? "border-r border-black/10"
                   : ""
               }
             `}
@@ -415,6 +532,10 @@ export default function MegaMenu({
                     h-full
                     w-full
                     object-cover
+                    transition-transform
+                    duration-700
+                    ease-out
+                    hover:scale-[1.03]
                   "
                 />
               </div>
@@ -432,9 +553,11 @@ export default function MegaMenu({
     );
   };
 
-  /* --------------------------------
-     BRANDS
-  -------------------------------- */
+  /*
+   * --------------------------------
+   * BRANDS
+   * --------------------------------
+   */
 
   const renderBrands = () => {
     const brands =
@@ -457,7 +580,7 @@ export default function MegaMenu({
             grid
             grid-cols-3
             gap-x-6
-            gap-y-2
+            gap-y-[7px]
             auto-rows-min
             px-6
           "
@@ -482,7 +605,7 @@ export default function MegaMenu({
           className="
             ml-8
             border-l
-            border-black/20
+            border-black/10
             pl-8
           "
         >
@@ -494,14 +617,9 @@ export default function MegaMenu({
                 overflow-hidden
               "
             >
-              <img
+              <AnimatedImage
                 src={activeImage}
                 alt=""
-                className="
-                  h-full
-                  w-full
-                  object-cover
-                "
               />
             </div>
           )}
@@ -510,32 +628,34 @@ export default function MegaMenu({
     );
   };
 
-  /* --------------------------------
-     RENDER
-  -------------------------------- */
+  /*
+   * --------------------------------
+   * RENDER
+   * --------------------------------
+   */
 
-  return (
-    <div
-      onMouseLeave={onClose}
-      className="
-        absolute
-        left-0
-        mt-2
-        z-50
-        w-full
-        bg-background-main
-        text-[14px]
-        font-medium
-        border-t
-        border-black/20
-        
-        shadow-[0_25px_70px_rgba(0,0,0,0.12)]
-      "
-    >
+return (
+  <div
+    onMouseEnter={cancelClose}
+    onMouseLeave={handleMouseLeave}
+    className="
+      absolute
+      left-0
+      top-full
+      z-50
+      w-full
+      bg-background-main
+      text-[14px]
+      font-medium
+    "
+  >
       <div
         className="
-          layout-container
-          py-8
+          mx-auto
+          w-full
+          max-w-[1440px]
+          px-10
+          py-7
         "
       >
         {activeMenu === "perfumes" &&

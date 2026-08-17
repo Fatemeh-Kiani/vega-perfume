@@ -16,17 +16,13 @@
 --color-brand-cream: #D9D1C4;
 
 /* Background */
---color-background-main: #F6F3ED; 
---color-background-soft: #F6F2EF;
+--color-background-main: #FFFFFF; 
+--color-background-soft: #F7F6F4;
 
 /* Text */
---color-text-primary: #342D26;
---color-text-secondary: #E3DCD3;
---color-text-muted: #A49B90;
-
-/* Accent */
---color-accent: #483B2E;
-
+--color-text-primary: #272420;
+--color-text-secondary: #0F0D0B;
+--color-text-muted:#979595;
 
 --shadow-text: 0 2px 12px rgba(0, 0, 0, 0.6);
 --shadow-text-soft: 0 1px 8px rgba(0, 0, 0, 0.35);
@@ -42,6 +38,7 @@
   html {
 
     scroll-behavior: smooth;
+  scroll-snap-type: y mandatory;
 
   }
 
@@ -70,5 +67,14 @@
     color: inherit;
 
   }
+
+}
+
+
+html,
+
+body {
+
+  scroll-behavior: smooth;
 
 }

@@ -26,6 +26,7 @@ export const megaMenu: MegaMenu[] = [
              image: Images.perfumes.floral,
           },
 
+
           {
             label: "Woody",
 
@@ -38,29 +39,18 @@ export const megaMenu: MegaMenu[] = [
              image: Images.perfumes.woody,
           },
 
-          // {
-          //   label: "Fresh",
+          {
+            label: "Fresh",
 
-          //   kind: "filter",
+            kind: "filter",
 
-          //   value: "fresh",
+            value: "fresh",
 
-          //   href: "/products?fragrance=fresh",
+            href: "/products?fragrance=fresh",
 
-          //    image: Images.perfumes.fresh,
-          // },
+             image: Images.perfumes.fresh,
+          },
 
-          // {
-          //   label: "Citrus",
-
-          //   kind: "filter",
-
-          //   value: "citrus",
-
-          //   href: "/products?fragrance=citrus",
-
-          //    image: Images.perfumes.citrus,
-          // },
 
           {
             label: "Fruity",
@@ -72,6 +62,28 @@ export const megaMenu: MegaMenu[] = [
             href: "/products?fragrance=fruity",
 
              image: Images.perfumes.fruity,
+          },
+                    {
+            label: "Citrus",
+
+            kind: "filter",
+
+            value: "citrus",
+
+            href: "/products?fragrance=citrus",
+
+             image: Images.perfumes.citrus,
+          },
+                              {
+            label: "Amber",
+
+            kind: "filter",
+
+            value: "amber",
+
+            href: "/products?fragrance=amber",
+
+             image: Images.perfumes.amber,
           },
 
           {
@@ -476,6 +488,27 @@ export const megaMenu: MegaMenu[] = [
           value: "mfk",
           href: "/brands/mfk",
           image: Images.brands.mfk,
+        },
+         {
+          label: "Diptyque",
+          kind: "brand",
+          value: "diptyque",
+          href: "/brands/diptyque",
+          image: Images.brands.diptyque,
+        },
+                 {
+          label: "Penhaligon's",
+          kind: "brand",
+          value: "penhaligons",
+          href: "/brands/penhaligons",
+          image: Images.brands.penhaligons,
+        },
+                 {
+          label: "Jivenchy",
+          kind: "brand",
+          value: "jivenchy",
+          href: "/brands/jivenchy",
+          image: Images.brands.jivenchy,
         },
 
       ],

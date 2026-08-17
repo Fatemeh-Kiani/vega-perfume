@@ -1,7 +1,7 @@
 import { Search } from "lucide-react";
+
 import { megaMenu } from "../../data/megaMenu";
 import MegaMenu from "./mega-menu/MegaMenu";
-
 
 type MenuBarProps = {
   activeMenu: string | null;
@@ -15,92 +15,171 @@ export default function MenuBar({
   setActiveMenu,
 }: MenuBarProps) {
   return (
-    <nav>
+    <nav
+      className="
+        relative
+        z-50
+      "
+      aria-label="Main navigation"
+      onMouseLeave={() => {
+        setActiveMenu(null);
+      }}
+    >
       <div
         className="
-          relative
-          flex
-          h-6
+        layout-container
+          grid
+          h-[62px]
+          grid-cols-[1fr_auto_1fr]
           items-center
-         
         "
       >
+        {/* LEFT — EMPTY */}
 
-        {/* Menu Center */}
+        <div />
+
+        {/* ==================================================
+            MENU
+        ================================================== */}
 
         <div
           className="
-            absolute
-            left-1/2
             flex
-            -translate-x-1/2
             items-center
-            gap-15
-            font-roboto
+            gap-10
           "
         >
-          {megaMenu.map((item) => (
-            <button
-              key={item.id}
-              className="
-              group
-              relative
-              font-medium
-                text-[15px]
-                transition-colors
-                duration-300
-               
-              "
-              onMouseEnter={() => setActiveMenu(item.id)}
-              onFocus={() => setActiveMenu(item.id)}
-            >
-              {item.label}
-              <span
-  className="
-    absolute
-    -bottom-0
-    left-1/2
-    h-[2px]
-    w-0
-    -translate-x-1/2
-    bg-text-primary
-    transition-all
-    duration-300
-    group-hover:w-full
-  "
-/>
-            </button>
-          ))}
+          {megaMenu.map((item) => {
+            const isActive =
+              activeMenu === item.id;
+
+            return (
+              <button
+                key={item.id}
+                type="button"
+                onMouseEnter={() =>
+                  setActiveMenu(item.id)
+                }
+                onFocus={() =>
+                  setActiveMenu(item.id)
+                }
+                aria-expanded={isActive}
+                aria-haspopup="true"
+                className="
+                  group
+                  relative
+                  whitespace-nowrap
+                  py-4
+                  font-notoSerif
+                  text-[12px]
+                  font-bold
+                  uppercase
+                  tracking-[0.04em]
+                  text-text-primary
+                  transition-colors
+                  duration-300
+                  hover:text-text-primary/65
+                  focus:outline-none
+                "
+              >
+                {item.label}
+
+                {/* CENTER OUT UNDERLINE */}
+
+                <span
+                  className="
+                    pointer-events-none
+                    absolute
+                    bottom-1
+                    left-1/2
+                    h-px
+                    w-0
+                    -translate-x-1/2
+                    bg-text-primary/80
+                    transition-all
+                    duration-500
+                    ease-[cubic-bezier(0.22,1,0.36,1)]
+                    group-hover:w-full
+                  "
+                />
+              </button>
+            );
+          })}
         </div>
 
+        {/* ==================================================
+            SEARCH
+        ================================================== */}
 
-        {/* Search Right */}
-
-        <button
+        <div
           className="
-            ml-auto
             flex
-            items-center
-            gap-4
+            justify-end
+            
           "
         >
-          <span
+          <button
+            type="button"
+            aria-label="Search"
             className="
-              h-px
-              w-28
-              bg-text-primary
+              group
+              flex
+              items-center
+              gap-3
             "
-          />
+          >
+            <span
+              className="
+                font-roboto
+                text-[9px]
+                font-medium
+                uppercase
+                tracking-[0.18em]
+                text-text-primary
+                transition-opacity
+                duration-300
+                group-hover:opacity-55
+              "
+            >
+              Search
+            </span>
 
-          <Search size={18} />
+            <span
+              className="
+                h-px
+                w-8
+                bg-text-primary/50
+                transition-all
+                duration-500
+                group-hover:w-16
+                group-hover:bg-text-primary
+              "
+            />
 
-        </button>
-
+            <Search
+              size={17}
+              strokeWidth={1.4}
+              className="
+                text-text-primary
+                transition-transform
+                duration-500
+                group-hover:scale-105
+              "
+            />
+          </button>
+        </div>
       </div>
+
+      {/* ==================================================
+          MEGA MENU
+      ================================================== */}
+
       <MegaMenu
-  activeMenu={activeMenu}
-  onClose={() => setActiveMenu(null)}
-/>
+        activeMenu={activeMenu}
+        onClose={() =>
+          setActiveMenu(null)
+        }
+      />
     </nav>
   );
 }

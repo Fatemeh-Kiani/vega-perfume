@@ -15,7 +15,7 @@ import versace from "./brands/versace.webp";
 import ysl from "./brands/ysl.webp";
 import aesop from "./brands/aesop.webp";
 import diptyque from "./brands/diptyque.webp";
-import jivenchy from "./brands/jivenchy.webp";
+import givenchy from "./brands/Givenchy.webp";
 import penhaligons from "./brands/penhaligons.webp";
 
 
@@ -67,7 +67,7 @@ export const Images = {
   aesop,
   diptyque,
   penhaligons,
-  jivenchy,
+  givenchy,
 },
 
   perfumes: {

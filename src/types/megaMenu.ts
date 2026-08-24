@@ -2,6 +2,7 @@ export type MegaMenuItemKind =
   | "brand"
   | "filter"
   | "subcategory"
+  |"collection"
   | "page";
 
 

@@ -10,13 +10,17 @@ import {
 } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 
+import { Link } from "react-router-dom";
 import { megaMenu } from "../../data/megaMenu";
 
 type MobileHeaderProps = {
   isOpen: boolean;
+
   setIsOpen: React.Dispatch<
     React.SetStateAction<boolean>
   >;
+
+  onSearch: () => void;
 };
 
 type MegaMenuItem = {
@@ -44,6 +48,7 @@ type MobileSection = MegaMenuData;
 export default function MobileHeader({
   isOpen,
   setIsOpen,
+  onSearch,
 }: MobileHeaderProps) {
   const [activeSection, setActiveSection] =
     useState<MobileSection | null>(null);
@@ -174,38 +179,42 @@ export default function MobileHeader({
           {megaMenu.map(
             (menuItem) => {
               return (
-                <button
-                  key={menuItem.id}
-                  type="button"
-                  onClick={() =>
-                    openSection(
-                      menuItem as MobileSection
-                    )
-                  }
-                  className="
-                    group
-                    flex
-                    w-full
-                    items-center
-                    justify-between
-                    border-b
-                    border-text-primary/10
-                    py-[15px]
-                    text-left
-                  "
-                >
-                  <span
-                    className="
-                      font-notoSerif
-                      text-[16px]
-                      font-light
-                      tracking-[0.01em]
-                      text-text-primary
-                      transition-transform
-                      duration-300
-                      group-active:translate-x-1
-                    "
-                  >
+               <button
+  key={menuItem.id}
+  type="button"
+  onClick={() =>
+    openSection(
+      menuItem as MobileSection
+    )
+  }
+  className="
+    group
+    flex
+    w-full
+    origin-left
+    items-center
+    justify-between
+    border-b
+    border-text-primary/10
+    py-[15px]
+    text-left
+    transition-transform
+    duration-150
+    active:scale-[0.97]
+  "
+>
+<span
+  className="
+    font-roboto
+    text-[11px]
+    font-light
+    uppercase
+    tracking-[0.1em]
+    text-text-primary
+    transition-colors
+  
+  "
+>
                     {menuItem.label}
                   </span>
 
@@ -263,7 +272,7 @@ export default function MobileHeader({
                   text-[8px]
                   font-medium
                   uppercase
-                  tracking-[0.18em]
+                  tracking-[0.2em]
                   text-text-muted
                 "
               >
@@ -275,31 +284,31 @@ export default function MobileHeader({
               <div className="flex flex-col">
                 {section.items.map(
                   (item) => (
-                    <a
-                      key={item.label}
-                      href={item.href}
-                      className="
-                        group
-                        flex
-                        w-full
-                        items-center
-                        justify-between
-                        border-b
-                        border-text-primary/10
-                        py-[10px]
-                        font-notoSerif
-                        text-[13px]
-                        font-light
-                        leading-none
-                        text-text-primary
-                        transition-colors
-                        duration-300
-                        active:text-text-primary/55
-                        last:border-b-0
-                      "
-                    >
-                      {/* NAME */}
-
+          <Link
+  key={item.label}
+  to={item.href}
+  onClick={closeMenu}
+className="
+  group
+  flex
+  w-full
+  items-center
+  justify-between
+  border-b
+  border-border/20
+  py-[10px]
+  font-roboto
+  text-[12px]
+  font-medium
+  tracking-[0.01em]
+  leading-none
+  text-text-secondary
+  transition-transform
+  duration-200
+  last:border-b-0
+  active:scale-[0.99]
+"
+>
                       <span>
                         {item.label}
                       </span>
@@ -314,10 +323,10 @@ export default function MobileHeader({
                           text-text-primary/35
                           transition-transform
                           duration-300
-                          group-active:translate-x-1
+                          
                         "
                       />
-                    </a>
+     </Link>
                   )
                 )}
               </div>
@@ -406,18 +415,17 @@ export default function MobileHeader({
           >
             {images.map(
               (item) => (
-                <a
-                  key={`${item.label}-${item.image}`}
-                  href={
-                    item.href ?? "#"
-                  }
-                  className="
-                    group
-                    block
-                    w-[88px]
-                    shrink-0
-                  "
-                >
+<Link
+  key={`${item.label}-${item.image}`}
+  to={item.href ?? `/${activeSection.id}`}
+  onClick={closeMenu}
+  className="
+    group
+    block
+    w-[88px]
+    shrink-0
+  "
+>
                   {/* IMAGE */}
 
                   <div
@@ -441,7 +449,7 @@ export default function MobileHeader({
                         transition-transform
                         duration-500
                         ease-out
-                        group-active:scale-[0.97]
+                       
                       "
                     />
                   </div>
@@ -454,16 +462,17 @@ export default function MobileHeader({
                       overflow-hidden
                       text-ellipsis
                       whitespace-nowrap
-                      font-notoSerif
-                      text-[10px]
-                      font-light
+                      font-roboto
+                      text-[11px]
+                      font-normal
+                      tracking-[0.01em]
                       leading-none
                       text-text-primary
                     "
                   >
                     {item.label}
                   </p>
-                </a>
+                </Link>
               )
             )}
           </div>
@@ -496,9 +505,10 @@ export default function MobileHeader({
           pt-5
         "
       >
-        <a
-          href={href}
-          className="
+<Link
+  to={href}
+  onClick={closeMenu}
+  className="
             group
             flex
             items-center
@@ -539,11 +549,11 @@ export default function MobileHeader({
               className="
                 transition-transform
                 duration-300
-                group-active:translate-x-1
+                group-active:scale-[0.97]
               "
             />
           </span>
-        </a>
+        </Link>
       </div>
     );
   };
@@ -600,11 +610,6 @@ export default function MobileHeader({
     );
   };
 
-  /*
-   * =====================================================
-   * CLOSED HEADER
-   * =====================================================
-   */
 return (
   <>
     {/* =========================================
@@ -661,9 +666,9 @@ return (
 
         {/* VEGA */}
 
-        <a
-          href="/"
-          aria-label="VEGA Home"
+<Link
+  to="/"
+  aria-label="VEGA Home"
           className="
             absolute
             left-1/2
@@ -682,7 +687,7 @@ return (
           >
             VEGA
           </span>
-        </a>
+        </Link>
 
         {/* ACTIONS */}
 
@@ -696,6 +701,7 @@ return (
           <button
             type="button"
             aria-label="Search"
+            onClick={onSearch}
             className="text-text-primary"
           >
             <Search

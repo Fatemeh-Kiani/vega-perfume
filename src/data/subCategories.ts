@@ -6,7 +6,29 @@ export const subCategories: SubCategory[] = [
   // =====================
   // BODY & BATH
   // =====================
+{
+  id: 40,
+  name: "Women's",
+  slug: "women",
+  categoryId: 1,
+  description: "Women's fragrances.",
+},
 
+{
+  id: 41,
+  name: "Men's",
+  slug: "men",
+  categoryId: 1,
+  description: "Men's fragrances.",
+},
+
+{
+  id: 42,
+  name: "Unisex",
+  slug: "unisex",
+  categoryId: 1,
+  description: "Unisex fragrances.",
+},
   {
     id: 1,
     name: "Body",

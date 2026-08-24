@@ -6,6 +6,8 @@ import {
   useTransform,
 } from "motion/react";
 import { ArrowUpRight } from "lucide-react";
+import { Link } from "react-router-dom";
+
 import { getCategories } from "../../services/categoryService";
 import { media } from "../../data/media";
 
@@ -21,81 +23,41 @@ type CategoryItem = {
 export default function CategorySection() {
   const [visible, setVisible] = useState(false);
   const [activeIndex, setActiveIndex] =
-    useState<number | null>(null);
+    useState(0);
 
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
+  const categories: CategoryItem[] =
+    getCategories()
+      .slice(0, 4)
+      .map((category) => {
+        const categoryMedia = media.find(
+          (item) =>
+            item.id === category.imageId,
+        );
 
-  const smoothX = useSpring(mouseX, {
-    stiffness: 90,
-    damping: 18,
-    mass: 0.7,
-  });
-
-  const smoothY = useSpring(mouseY, {
-    stiffness: 90,
-    damping: 18,
-    mass: 0.7,
-  });
-
-  const categories: CategoryItem[] = getCategories()
-    .slice(0, 4)
-    .map((category) => {
-      const categoryMedia = media.find(
-        (item) => item.id === category.imageId
-      );
-
-      return {
-        id: category.id,
-        name: category.name,
-        slug: category.slug,
-        description:
-          category.description ??
-          "Discover our curated collection.",
-        image: categoryMedia?.url ?? "",
-        alt:
-          categoryMedia?.alt ?? category.name,
-      };
-    });
+        return {
+          id: category.id,
+          name: category.name,
+          slug: category.slug,
+          description:
+            category.description ??
+            "Discover our curated collection.",
+          image:
+            categoryMedia?.url ?? "",
+          alt:
+            categoryMedia?.alt ??
+            category.name,
+        };
+      });
 
   useEffect(() => {
     const timer = window.setTimeout(() => {
       setVisible(true);
-    }, 150);
+    }, 120);
 
     return () => {
       window.clearTimeout(timer);
     };
   }, []);
-
-  const handleMouseMove = (
-    event: React.MouseEvent<HTMLElement>
-  ) => {
-    const element =
-      event.currentTarget;
-
-    const rect =
-      element.getBoundingClientRect();
-
-    const x =
-      (event.clientX - rect.left) /
-        rect.width -
-      0.5;
-
-    const y =
-      (event.clientY - rect.top) /
-        rect.height -
-      0.5;
-
-    mouseX.set(x * 18);
-    mouseY.set(y * 18);
-  };
-
-  const handleMouseLeave = () => {
-    mouseX.set(0);
-    mouseY.set(0);
-    setActiveIndex(null);
-  };
 
   if (!categories.length) {
     return null;
@@ -105,19 +67,19 @@ export default function CategorySection() {
     <section
       className="
         layout-container
-        py-10
-        sm:py-14
-        lg:py-16
+        py-16
+        sm:py-20
+        lg:py-28
       "
     >
       {/* ==================================================
-          SECTION INTRO
+          HEADER
       ================================================== */}
 
       <motion.div
         initial={{
           opacity: 0,
-          y: 25,
+          y: 20,
         }}
         animate={
           visible
@@ -128,7 +90,7 @@ export default function CategorySection() {
             : undefined
         }
         transition={{
-          duration: 0.9,
+          duration: 0.8,
           ease: [0.22, 1, 0.36, 1],
         }}
         className="
@@ -137,11 +99,13 @@ export default function CategorySection() {
           items-end
           justify-between
           sm:mb-10
+          lg:mb-12
         "
       >
         <div>
           <div
             className="
+              mb-3
               flex
               items-center
               gap-3
@@ -149,36 +113,36 @@ export default function CategorySection() {
           >
             <span
               className="
-                block
                 h-px
                 w-8
-                bg-text-muted/70
+                bg-[#171717]
               "
             />
 
-            <p
+            <span
               className="
                 font-roboto
                 text-[8px]
+                font-medium
                 uppercase
-                tracking-[0.28em]
-                text-text-muted
+                tracking-[0.3em]
+                text-[#777]
               "
             >
               The collection
-            </p>
+            </span>
           </div>
 
           <h2
             className="
-              mt-2
               font-notoSerif
-              text-[28px]
+              text-[30px]
               font-light
               leading-none
-              tracking-[-0.035em]
-              text-text-primary
-              sm:text-[34px]
+              tracking-[-0.04em]
+              text-[#171717]
+              sm:text-[36px]
+              lg:text-[42px]
             "
           >
             Explore your world
@@ -191,8 +155,8 @@ export default function CategorySection() {
             font-roboto
             text-[8px]
             uppercase
-            tracking-[0.22em]
-            text-text-muted
+            tracking-[0.25em]
+            text-[#888]
             sm:block
           "
         >
@@ -201,182 +165,436 @@ export default function CategorySection() {
       </motion.div>
 
       {/* ==================================================
-          ONE SINGLE RESPONSIVE GALLERY
+          DESKTOP ACCORDION
       ================================================== */}
 
       <div
-        onMouseMove={handleMouseMove}
-        onMouseLeave={handleMouseLeave}
         className="
-          relative
+          hidden
+          h-[570px]
           w-full
+          gap-1
+          overflow-hidden
+          lg:flex
         "
       >
-        <div
-          className="
-            flex
-            w-full
-            gap-3
-            overflow-x-auto
-            overscroll-x-contain
-            snap-x
-            snap-mandatory
-            pb-2
-
-            sm:grid
-            sm:grid-cols-4
-            sm:gap-2
-            sm:overflow-visible
-            sm:pb-0
-
-            [scrollbar-width:none]
-            [&::-webkit-scrollbar]:hidden
-          "
-        >
-          {categories.map(
-            (category, index) => (
-              <CategoryCard
-                key={category.id}
-                category={category}
-                index={index}
-                visible={visible}
-                activeIndex={activeIndex}
-                setActiveIndex={
-                  setActiveIndex
-                }
-                smoothX={smoothX}
-                smoothY={smoothY}
-              />
-            )
-          )}
-        </div>
+        {categories.map(
+          (category, index) => (
+            <DesktopPanel
+              key={category.id}
+              category={category}
+              index={index}
+              active={activeIndex === index}
+              onActivate={() =>
+                setActiveIndex(index)
+              }
+            />
+          ),
+        )}
       </div>
+
+      {/* ==================================================
+          MOBILE / TABLET ACCORDION
+      ================================================== */}
+<div
+  className="
+    flex
+    gap-2
+    overflow-x-auto
+    overscroll-x-contain
+    snap-x
+    snap-mandatory
+    pb-2
+    lg:hidden
+
+    [scrollbar-width:none]
+    [&::-webkit-scrollbar]:hidden
+  "
+>
+  {categories.map(
+    (category, index) => (
+      <MobilePanel
+        key={category.id}
+        category={category}
+        index={index}
+      />
+    ),
+  )}
+</div>
     </section>
   );
 }
 
 /* ========================================================
-   CATEGORY CARD
+   DESKTOP PANEL
 ======================================================== */
 
-function CategoryCard({
+function DesktopPanel({
   category,
   index,
-  visible,
-  activeIndex,
-  setActiveIndex,
-  smoothX,
-  smoothY,
+  active,
+  onActivate,
 }: {
   category: CategoryItem;
   index: number;
-  visible: boolean;
-  activeIndex: number | null;
-  setActiveIndex: (
-    index: number | null
-  ) => void;
-  smoothX: any;
-  smoothY: any;
+  active: boolean;
+  onActivate: () => void;
 }) {
-  const isActive =
-    activeIndex === index;
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
 
-  const anotherCardIsActive =
-    activeIndex !== null &&
-    !isActive;
+  const springX = useSpring(mouseX, {
+    stiffness: 80,
+    damping: 20,
+    mass: 0.8,
+  });
+
+  const springY = useSpring(mouseY, {
+    stiffness: 80,
+    damping: 20,
+    mass: 0.8,
+  });
 
   const imageX = useTransform(
-    smoothX,
-    [-18, 18],
-    [-5, 5]
+    springX,
+    [-0.5, 0.5],
+    [-5, 5],
   );
 
   const imageY = useTransform(
-    smoothY,
-    [-18, 18],
-    [-5, 5]
+    springY,
+    [-0.5, 0.5],
+    [-5, 5],
   );
 
+  function handleMouseMove(
+    event: React.MouseEvent<HTMLDivElement>,
+  ) {
+    onActivate();
+
+    const rect =
+      event.currentTarget.getBoundingClientRect();
+
+    const x =
+      (event.clientX - rect.left) /
+        rect.width -
+      0.5;
+
+    const y =
+      (event.clientY - rect.top) /
+        rect.height -
+      0.5;
+
+    mouseX.set(x);
+    mouseY.set(y);
+  }
+
+  function handleMouseLeave() {
+    mouseX.set(0);
+    mouseY.set(0);
+  }
+
   return (
-    <motion.a
-      href={`/category/${category.slug}`}
-      initial={{
-        opacity: 0,
-        y: 55,
-        scale: 0.97,
+    <motion.div
+      onMouseEnter={onActivate}
+      animate={{
+        flexGrow: active ? 3.2 : 1,
       }}
-      animate={
-        visible
-          ? {
-              opacity:
-                anotherCardIsActive
-                  ? 0.48
-                  : 1,
-              y: 0,
-              scale: 1,
-            }
-          : undefined
-      }
       transition={{
-        opacity: {
-          duration: 0.35,
-          ease: "easeOut",
-        },
-
-        y: {
-          duration: 0.8,
-          delay: index * 0.1,
-          ease: [0.22, 1, 0.36, 1],
-        },
-
-        scale: {
-          duration: 0.8,
-          ease: [0.22, 1, 0.36, 1],
-        },
+        duration: 0.8,
+        ease: [0.22, 1, 0.36, 1],
       }}
-      onMouseEnter={() =>
-        setActiveIndex(index)
-      }
-      onFocus={() =>
-        setActiveIndex(index)
-      }
+      className="
+        group
+        relative
+        min-w-0
+        overflow-hidden
+        bg-[#E8E5DF]
+      "
+    >
+      <Link
+          to={`/products?category=${category.slug}`}
+        className="block h-full"
+      >
+        <div
+          onMouseMove={handleMouseMove}
+          onMouseLeave={handleMouseLeave}
+          className="
+            relative
+            h-full
+            w-full
+            overflow-hidden
+          "
+        >
+          {/* ==================================================
+              IMAGE
+          ================================================== */}
+
+          <motion.img
+            src={category.image}
+            alt={category.alt}
+            style={{
+              x: imageX,
+              y: imageY,
+            }}
+            animate={{
+              scale: active ? 1.07 : 1.02,
+            }}
+            transition={{
+              duration: 1.1,
+              ease: [0.22, 1, 0.36, 1],
+            }}
+            className="
+              absolute
+              inset-0
+              h-full
+              w-full
+              object-cover
+            "
+          />
+
+          {/* ==================================================
+              GRADIENT
+          ================================================== */}
+
+          <div
+            className="
+              pointer-events-none
+              absolute
+              inset-0
+              bg-gradient-to-t
+              from-black/70
+              via-black/10
+              to-black/5
+            "
+          />
+
+          {/* ==================================================
+              NUMBER
+          ================================================== */}
+
+          <div
+            className="
+              absolute
+              left-5
+              top-5
+              z-20
+              flex
+              items-center
+              gap-3
+            "
+          >
+            <span
+              className="
+                font-roboto
+                text-[8px]
+                font-medium
+                tracking-[0.2em]
+                text-white
+              "
+            >
+              0{index + 1}
+            </span>
+
+            <span
+              className="
+                h-px
+                w-7
+                bg-white/60
+              "
+            />
+          </div>
+
+          {/* ==================================================
+              VERTICAL TITLE
+              inactive
+          ================================================== */}
+
+          <motion.div
+            animate={{
+              opacity: active ? 0 : 1,
+              x: active ? -10 : 0,
+            }}
+            transition={{
+              duration: 0.4,
+            }}
+            className="
+              absolute
+              bottom-6
+              left-5
+              z-20
+              origin-left
+              -rotate-90
+            "
+          >
+            <span
+              className="
+                whitespace-nowrap
+                font-notoSerif
+                text-[21px]
+                font-light
+                text-white
+              "
+            >
+              {category.name}
+            </span>
+          </motion.div>
+
+          {/* ==================================================
+              ACTIVE CONTENT
+          ================================================== */}
+
+          <motion.div
+            initial={false}
+            animate={{
+              opacity: active ? 1 : 0,
+              y: active ? 0 : 25,
+            }}
+            transition={{
+              duration: 0.6,
+              delay: active ? 0.12 : 0,
+              ease: [0.22, 1, 0.36, 1],
+            }}
+            className="
+              pointer-events-none
+              absolute
+              inset-x-0
+              bottom-0
+              z-20
+              p-7
+            "
+          >
+            <div
+              className="
+                mb-4
+                h-px
+                w-12
+                bg-white
+              "
+            />
+
+            <span
+              className="
+                font-roboto
+                text-[7px]
+                font-medium
+                uppercase
+                tracking-[0.3em]
+                text-white/65
+              "
+            >
+              Collection
+            </span>
+
+            <h3
+              className="
+                mt-2
+                font-notoSerif
+                text-[34px]
+                font-light
+                leading-none
+                tracking-[-0.04em]
+                text-white
+              "
+            >
+              {category.name}
+            </h3>
+
+            <p
+              className="
+                mt-3
+                max-w-[300px]
+                font-roboto
+                text-[9px]
+                font-light
+                leading-[1.7]
+                text-white/75
+              "
+            >
+              {category.description}
+            </p>
+
+            {/* BUTTON */}
+
+            <div
+              className="
+                pointer-events-auto
+                mt-5
+                inline-flex
+              "
+            >
+              <span
+                className="
+                  flex
+                  h-10
+                  items-center
+                  gap-3
+                  border
+                  border-white
+                  px-5
+                  text-white
+                  transition-all
+                  duration-500
+                  hover:bg-[#FCFBF8]
+                  hover:text-[#1A1A1A]
+                "
+              >
+                <span
+                  className="
+                    font-roboto
+                    text-[7px]
+                    font-medium
+                    uppercase
+                    tracking-[0.25em]
+                  "
+                >
+                  Explore
+                </span>
+
+                <ArrowUpRight
+                  size={13}
+                  strokeWidth={1.2}
+                />
+              </span>
+            </div>
+          </motion.div>
+        </div>
+      </Link>
+    </motion.div>
+  );
+}
+
+/* ========================================================
+   MOBILE PANEL
+======================================================== */
+function MobilePanel({
+  category,
+  index,
+}: {
+  category: CategoryItem;
+  index: number;
+}) {
+  return (
+    <Link
+        to={`/products?category=${category.slug}`}
       className="
         group
         relative
         block
         h-[430px]
-        min-w-[78vw]
+        w-[82vw]
+        max-w-[360px]
+        shrink-0
         snap-center
         overflow-hidden
-        bg-[#E8E2D8]
-
-        sm:h-[500px]
-        sm:min-w-0
-        sm:snap-none
-
-        lg:h-[580px]
+        bg-[#E8E5DF]
       "
     >
-      {/* ==================================================
-          IMAGE
-      ================================================== */}
+      {/* IMAGE */}
 
       <motion.img
         src={category.image}
         alt={category.alt}
-        style={{
-          x: imageX,
-          y: imageY,
-        }}
-        animate={{
-          scale: isActive
-            ? 1.018
-            : 1,
-        }}
-        transition={{
-          duration: 1.05,
-          ease: [0.22, 1, 0.36, 1],
-        }}
         className="
           absolute
           inset-0
@@ -386,9 +604,7 @@ function CategoryCard({
         "
       />
 
-      {/* ==================================================
-          STATIC GRADIENT
-      ================================================== */}
+      {/* GRADIENT */}
 
       <div
         className="
@@ -396,157 +612,136 @@ function CategoryCard({
           absolute
           inset-0
           bg-gradient-to-t
-          from-black/55
-          via-black/10
+          from-black/70
+          via-black/15
           to-transparent
         "
       />
 
-      {/* ==================================================
-          NUMBER
-      ================================================== */}
+      {/* NUMBER */}
 
-      <span
+      <div
         className="
           absolute
-          left-4
-          top-4
-          z-20
-          font-roboto
-          text-[8px]
-          tracking-[0.2em]
-          text-white/65
+          left-5
+          top-5
+          z-10
+          flex
+          items-center
+          gap-3
         "
       >
-        0{index + 1}
-      </span>
+        <span
+          className="
+            font-roboto
+            text-[8px]
+            font-medium
+            tracking-[0.2em]
+            text-white
+          "
+        >
+          0{index + 1}
+        </span>
 
-      {/* ==================================================
-          CONTENT
-      ================================================== */}
+        <span
+          className="
+            h-px
+            w-7
+            bg-white/60
+          "
+        />
+      </div>
+
+      {/* CONTENT */}
 
       <div
         className="
           absolute
           inset-x-0
           bottom-0
-          z-20
-          px-4
-          pb-5
-          lg:px-5
-          lg:pb-6
+          z-10
+          p-5
         "
       >
         <div
           className="
-            flex
-            min-h-[112px]
-            flex-col
-            justify-end
+            mb-3
+            h-px
+            w-8
+            bg-white
+          "
+        />
+
+        <span
+          className="
+            font-roboto
+            text-[7px]
+            font-medium
+            uppercase
+            tracking-[0.28em]
+            text-white/65
           "
         >
-          {/* NAME */}
+          Collection
+        </span>
 
-          <motion.div
-            animate={{
-              y: isActive ? 0 : 9,
-              opacity:
-                isActive ? 1 : 0.86,
-            }}
-            transition={{
-              duration: 0.8,
-              ease: [0.22, 1, 0.36, 1],
-            }}
-          >
-            <p
-              className="
-                font-roboto
-                text-[7px]
-                uppercase
-                tracking-[0.25em]
-                text-white/60
-              "
-            >
-              Discover
-            </p>
-
-            <h3
-              className="
-                mt-1
-                whitespace-nowrap
-                font-notoSerif
-                text-[18px]
-                font-light
-                leading-tight
-                tracking-[-0.025em]
-                text-white
-
-                sm:text-[19px]
-                lg:text-[21px]
-              "
-            >
-              {category.name}
-            </h3>
-          </motion.div>
-
-          {/* DESCRIPTION */}
-
-          <motion.p
-            initial={false}
-            animate={{
-              opacity:
-                isActive ? 0.78 : 0,
-              y:
-                isActive ? 0 : 12,
-            }}
-            transition={{
-              duration: 0.72,
-              delay: isActive
-                ? 0.08
-                : 0,
-              ease: [0.22, 1, 0.36, 1],
-            }}
-            className="
-              mt-2
-              min-h-[40px]
-              max-w-[190px]
-              font-roboto
-              text-[10px]
-              font-light
-              leading-[1.7]
-              text-white
-            "
-          >
-            {category.description}
-          </motion.p>
-        </div>
-
-        {/* ARROW */}
-
-        <motion.div
-          animate={{
-            opacity:
-              isActive ? 1 : 0.55,
-            x:
-              isActive ? 0 : -3,
-          }}
-          transition={{
-            duration: 0.55,
-            ease: [0.22, 1, 0.36, 1],
-          }}
+        <h3
           className="
-            absolute
-            bottom-6
-            right-5
+            mt-1.5
+            font-notoSerif
+            text-[23px]
+            font-light
+            leading-none
+            tracking-[-0.03em]
             text-white
           "
         >
+          {category.name}
+        </h3>
+
+        <p
+          className="
+            mt-3
+            max-w-[270px]
+            font-roboto
+            text-[9px]
+            font-light
+            leading-[1.7]
+            text-white/75
+          "
+        >
+          {category.description}
+        </p>
+
+        {/* EXPLORE */}
+
+        <span
+          className="
+            mt-5
+            inline-flex
+            h-9
+            items-center
+            gap-3
+            border
+            border-white
+            bg-transparent
+            px-4
+            font-roboto
+            text-[7px]
+            font-medium
+            uppercase
+            tracking-[0.22em]
+            text-white
+          "
+        >
+          Explore
+
           <ArrowUpRight
-            size={15}
-            strokeWidth={1}
+            size={12}
+            strokeWidth={1.2}
           />
-        </motion.div>
+        </span>
       </div>
-    </motion.a>
+    </Link>
   );
 }

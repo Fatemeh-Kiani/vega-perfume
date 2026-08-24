@@ -74,20 +74,15 @@ export const filters: FilterOption[] = [
     slug: "aquatic",
     type: "fragranceFamily",
   },
+    {
 
-  {
     id: 16,
-    name: "Gourmand",
-    slug: "gourmand",
+    name: "Amber",
+    slug: "amber",
     type: "fragranceFamily",
+
   },
 
-  {
-    id: 17,
-    name: "Oriental",
-    slug: "oriental",
-    type: "fragranceFamily",
-  },
 
 
   // =====================

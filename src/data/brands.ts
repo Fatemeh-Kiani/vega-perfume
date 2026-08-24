@@ -30,15 +30,6 @@ export const brands: Brand[] = [
 
   {
     id: 4,
-    name: "Creed",
-    slug: "creed",
-    description:
-      "A historic fragrance house creating handcrafted luxury perfumes.",
-    country: "United Kingdom",
-  },
-
-  {
-    id: 5,
     name: "Byredo",
     slug: "byredo",
     description:
@@ -47,7 +38,7 @@ export const brands: Brand[] = [
   },
 
   {
-    id: 6,
+    id: 5,
     name: "Amouage",
     slug: "amouage",
     description:
@@ -56,7 +47,7 @@ export const brands: Brand[] = [
   },
 
   {
-    id: 7,
+    id: 6,
     name: "Jo Malone",
     slug: "jo-malone",
     description:
@@ -64,26 +55,10 @@ export const brands: Brand[] = [
     country: "United Kingdom",
   },
 
-  {
-    id: 8,
-    name: "Xerjoff",
-    slug: "xerjoff",
-    description:
-      "An Italian luxury perfume house creating exclusive fragrances.",
-    country: "Italy",
-  },
+
 
   {
-    id: 9,
-    name: "Initio",
-    slug: "initio",
-    description:
-      "A luxury fragrance house focused on powerful and sophisticated compositions.",
-    country: "France",
-  },
-
-  {
-    id: 10,
+    id: 7,
     name: "Penhaligon's",
     slug: "penhaligons",
     description:
@@ -92,7 +67,7 @@ export const brands: Brand[] = [
   },
 
   {
-    id: 11,
+    id: 8,
     name: "Diptyque",
     slug: "diptyque",
     description:
@@ -101,7 +76,7 @@ export const brands: Brand[] = [
   },
 
   {
-    id: 12,
+    id: 9,
     name: "Le Labo",
     slug: "le-labo",
     description:
@@ -110,7 +85,7 @@ export const brands: Brand[] = [
   },
 
   {
-    id: 13,
+    id: 10,
     name: "Hermès",
     slug: "hermes",
     description:
@@ -119,7 +94,7 @@ export const brands: Brand[] = [
   },
 
   {
-    id: 14,
+    id: 11,
     name: "Givenchy",
     slug: "givenchy",
     description:
@@ -128,16 +103,7 @@ export const brands: Brand[] = [
   },
 
   {
-    id: 15,
-    name: "Acqua di Parma",
-    slug: "acqua-di-parma",
-    description:
-      "An Italian fragrance house known for timeless citrus scents.",
-    country: "Italy",
-  },
-
-  {
-    id: 16,
+    id: 12,
     name: "Prada",
     slug: "prada",
     description:
@@ -146,7 +112,7 @@ export const brands: Brand[] = [
   },
 
   {
-    id: 17,
+    id: 13,
     name: "Gucci",
     slug: "gucci",
     description:
@@ -155,7 +121,7 @@ export const brands: Brand[] = [
   },
 
   {
-    id: 18,
+    id: 14,
     name: "Versace",
     slug: "versace",
     description:
@@ -164,7 +130,7 @@ export const brands: Brand[] = [
   },
 
   {
-    id: 19,
+    id: 15,
     name: "YSL",
     slug: "ysl",
     description:
@@ -173,7 +139,7 @@ export const brands: Brand[] = [
   },
 
   {
-    id: 20,
+    id: 16,
     name: "Aesop",
     slug: "aesop",
     description:
@@ -181,7 +147,7 @@ export const brands: Brand[] = [
     country: "Australia",
   },
   {
-  id: 21,
+  id: 17,
   name: "Maison Francis Kurkdjian",
   slug: "maison-francis-kurkdjian",
   description:

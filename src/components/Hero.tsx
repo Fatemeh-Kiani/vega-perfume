@@ -280,7 +280,7 @@ export default function Hero() {
                 font-light
                 leading-[0.78]
                 tracking-[-0.075em]
-                text-white
+                text-[#E9E4DB]
                 sm:text-[100px]
                 md:text-[120px]
                 lg:text-[clamp(110px,12vw,190px)]
@@ -316,7 +316,7 @@ export default function Hero() {
                 font-light
                 leading-[0.95]
                 tracking-[-0.045em]
-                text-white
+                text-[#E9E4DB]
                 sm:text-[40px]
                 lg:text-[52px]
               "
@@ -397,11 +397,11 @@ export default function Hero() {
     font-medium
     uppercase
     tracking-[0.28em]
-    text-white
+   text-[#E9E4DB]
     transition-all
     duration-500
     hover:border-background-main
-    hover:bg-background-main
+    hover:bg-[#E9E4DB]
     hover:text-text-primary
   "
 >

@@ -1,6 +1,7 @@
 import { brands } from "../../data/brands";
 import { useEffect, useRef, useState } from "react";
 import { ArrowRight, Heart } from "lucide-react";
+import { Link as RouterLink } from "react-router-dom";
 import { motion } from "motion/react";
 
 import { getProducts } from "../../services/productService";
@@ -27,7 +28,9 @@ export default function BestSellers() {
       if (!mounted) return;
 
       setProducts(
-        data.filter((product) => product.isBestSeller)
+        data.filter((product) =>
+  product.collections?.includes("best-sellers")
+)
       );
     }
 
@@ -140,8 +143,8 @@ export default function BestSellers() {
 
             {/* DESKTOP CTA */}
 
-            <a
-              href="/products"
+            <RouterLink
+              to="/products"
               className="
                 group
                 mt-5
@@ -175,7 +178,7 @@ export default function BestSellers() {
                   group-hover:translate-x-1
                 "
               />
-            </a>
+            </RouterLink>
           </div>
 
           {/* SIDE LABEL */}
@@ -269,7 +272,7 @@ export default function BestSellers() {
                   w-[72vw]
                   shrink-0
                   sm:w-[44vw]
-                  md:w-[32vw]
+                  min-[1120px]:w-[25vw]
                   lg:w-[25vw]
                   xl:w-[22vw]
                 "
@@ -283,8 +286,8 @@ export default function BestSellers() {
                     relative
                   "
                 >
-                  <a
-                    href={`/products/${product.slug}`}
+                  <RouterLink
+                    to={`/products/${product.slug}`}
                     aria-label={`View ${product.name}`}
                     className="
                       group/image
@@ -298,7 +301,7 @@ export default function BestSellers() {
                     {/* MAIN IMAGE */}
 
                     <img
-                      src={product.image}
+                     src={product.images[0]?.url}
                       alt={product.name}
                       loading="lazy"
                       className="
@@ -315,9 +318,9 @@ export default function BestSellers() {
 
                     {/* HOVER IMAGE */}
 
-                    {product.hoverImage && (
+                    {product.images[1] && (
                       <img
-                        src={product.hoverImage}
+                        src={product.images[1]?.url}
                         alt=""
                         aria-hidden="true"
                         loading="lazy"
@@ -381,15 +384,15 @@ export default function BestSellers() {
     backdrop-blur-sm
     transition-all
     duration-500
-    md:translate-y-2
-    md:opacity-0
-    md:group-hover/image:translate-y-0
-    md:group-hover/image:opacity-100
+    min-[1120px]:translate-y-2
+    min-[1120px]:opacity-0
+    min-[1120px]:group-hover/image:translate-y-0
+    min-[1120px]:group-hover/image:opacity-100
   "
 >
   View fragrance
 </span>
-       </a>
+       </RouterLink>
 
 
                   <button
@@ -592,8 +595,8 @@ export default function BestSellers() {
               END CARD
           ================================================== */}
 
-          <a
-            href="/products"
+          <RouterLink
+            to="/products"
             className="
               group
               flex
@@ -643,7 +646,7 @@ export default function BestSellers() {
                 "
               />
             </span>
-          </a>
+          </RouterLink>
         </div>
       </div>
 
@@ -678,8 +681,8 @@ export default function BestSellers() {
 
         {/* MOBILE CTA */}
 
-        <a
-          href="/products"
+        <RouterLink
+          to="/products"
           className="
             group
             flex
@@ -711,7 +714,7 @@ export default function BestSellers() {
               group-active:translate-x-1
             "
           />
-        </a>
+        </RouterLink>
       </div>
     </section>
   );

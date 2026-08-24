@@ -1,27 +1,28 @@
-
 import { motion } from "motion/react";
 import {
   Heart,
   Search,
   ShoppingBag,
 } from "lucide-react";
-
+import { Link } from "react-router-dom";
 import { megaMenu } from "../../data/megaMenu";
 import MegaMenu from "./mega-menu/MegaMenu";
 
 type CompactHeaderProps = {
   activeMenu: string | null;
+
   setActiveMenu: React.Dispatch<
     React.SetStateAction<string | null>
   >;
+
+  onSearch: () => void;
 };
 
 export default function CompactHeader({
   activeMenu,
   setActiveMenu,
+  onSearch,
 }: CompactHeaderProps) {
-
-
   return (
     <motion.header
       initial={{
@@ -36,9 +37,9 @@ export default function CompactHeader({
         duration: 0.45,
         ease: [0.22, 1, 0.36, 1],
       }}
-onMouseLeave={() => {
-  setActiveMenu(null);
-}}
+      onMouseLeave={() => {
+        setActiveMenu(null);
+      }}
       className="
         fixed
         inset-x-0
@@ -53,12 +54,11 @@ onMouseLeave={() => {
       ================================================== */}
 
       <div
-         className="
+        className="
           h-px
           w-full
           bg-text-primary/10
         "
-
       />
 
       {/* ==================================================
@@ -87,8 +87,8 @@ onMouseLeave={() => {
         >
           {/* VEGA */}
 
-          <a
-            href="/"
+          <Link
+            to="/"
             aria-label="VEGA Home"
             className="
               group
@@ -109,26 +109,14 @@ onMouseLeave={() => {
             >
               VEGA
             </span>
-
-            <span
-              className="
-               
-                w-7
-                bg-text-primary/20
-                transition-all
-                duration-500
-                ease-out
-                group-hover:w-10
-                group-hover:bg-text-primary/45
-              "
-            />
-          </a>
+          </Link>
 
           {/* SEARCH */}
 
           <button
             type="button"
             aria-label="Search"
+            onClick={onSearch}
             className="
               group
               flex
@@ -181,14 +169,17 @@ onMouseLeave={() => {
               activeMenu === item.id;
 
             return (
-              <button
+              <Link
                 key={item.id}
-                type="button"
+                to={item.href ?? `/products`}
                 onMouseEnter={() => {
                   setActiveMenu(item.id);
                 }}
                 onFocus={() => {
                   setActiveMenu(item.id);
+                }}
+                onClick={() => {
+                  setActiveMenu(null);
                 }}
                 aria-expanded={isActive}
                 aria-haspopup="true"
@@ -232,7 +223,7 @@ onMouseLeave={() => {
                     }
                   `}
                 />
-              </button>
+              </Link>
             );
           })}
         </nav>

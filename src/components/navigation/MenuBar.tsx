@@ -1,18 +1,24 @@
-import { Search } from "lucide-react";
 
+
+import { Search } from "lucide-react";
+import { Link } from "react-router-dom";
 import { megaMenu } from "../../data/megaMenu";
 import MegaMenu from "./mega-menu/MegaMenu";
 
 type MenuBarProps = {
   activeMenu: string | null;
+
   setActiveMenu: React.Dispatch<
     React.SetStateAction<string | null>
   >;
+
+  onSearch: () => void;
 };
 
 export default function MenuBar({
   activeMenu,
   setActiveMenu,
+  onSearch,
 }: MenuBarProps) {
   return (
     <nav
@@ -54,55 +60,54 @@ export default function MenuBar({
               activeMenu === item.id;
 
             return (
-              <button
-                key={item.id}
-                type="button"
-                onMouseEnter={() =>
-                  setActiveMenu(item.id)
-                }
-                onFocus={() =>
-                  setActiveMenu(item.id)
-                }
-                aria-expanded={isActive}
-                aria-haspopup="true"
-                className="
-                  group
-                  relative
-                  whitespace-nowrap
-                  py-4
-                  font-notoSerif
-                  text-[12px]
-                  font-bold
-                  uppercase
-                  tracking-[0.04em]
-                  text-text-primary
-                  transition-colors
-                  duration-300
-                  hover:text-text-primary/65
-                  focus:outline-none
-                "
-              >
-                {item.label}
+<Link
+  key={item.id}
+  to={item.href ?? `/${item.id}`}
+  onMouseEnter={() =>
+    setActiveMenu(item.id)
+  }
+  onFocus={() =>
+    setActiveMenu(item.id)
+  }
+  aria-expanded={isActive}
+  aria-haspopup="true"
+  className="
+    group
+    relative
+    whitespace-nowrap
+    py-4
+    font-notoSerif
+    text-[12px]
+    font-bold
+    uppercase
+    tracking-[0.04em]
+    text-text-primary
+    transition-colors
+    duration-300
+    hover:text-text-primary/65
+    focus:outline-none
+  "
+>
+  {item.label}
 
-                {/* CENTER OUT UNDERLINE */}
-
-                <span
-                  className="
-                    pointer-events-none
-                    absolute
-                    bottom-1
-                    left-1/2
-                    h-px
-                    w-0
-                    -translate-x-1/2
-                    bg-text-primary/80
-                    transition-all
-                    duration-500
-                    ease-[cubic-bezier(0.22,1,0.36,1)]
-                    group-hover:w-full
-                  "
-                />
-              </button>
+  <span
+    className="
+      pointer-events-none
+      absolute
+      bottom-1
+      left-1/2
+      h-px
+      w-0
+      -translate-x-1/2
+      bg-text-primary/80
+      transition-all
+      duration-500
+      ease-[cubic-bezier(0.22,1,0.36,1)]
+      group-hover:w-full
+    "
+  />
+</Link>
+             
             );
           })}
         </div>
@@ -121,6 +126,7 @@ export default function MenuBar({
           <button
             type="button"
             aria-label="Search"
+            onClick={onSearch}
             className="
               group
               flex

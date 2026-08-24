@@ -3,6 +3,7 @@ import {
   useRef,
   useState,
 } from "react";
+import { Link } from "react-router-dom";
 import { megaMenu } from "../../../data/megaMenu";
 import { motion } from "motion/react";
 
@@ -21,9 +22,9 @@ function MenuLink({
   onMouseEnter?: () => void;
 }) {
   return (
-    <a
-      href={href}
-      onMouseEnter={onMouseEnter}
+  <Link
+    to={href}
+    onMouseEnter={onMouseEnter}
       className="
         group
         relative
@@ -64,7 +65,7 @@ function MenuLink({
           "
         />
       </span>
-    </a>
+    </Link>
   );
 }
 

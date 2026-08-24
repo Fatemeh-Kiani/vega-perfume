@@ -11,18 +11,14 @@
 --font-roboto:"Roboto";
 --font-semibold:" Semi Bold";
 
-/* Brand */
---color-brand-sage: #BEBCA7;
---color-brand-cream: #D9D1C4;
-
 /* Background */
---color-background-main: #FFFFFF; 
---color-background-soft: #F7F6F4;
-
+--color-background-main: #FAF9F6; 
+--color-background-soft: #FCFCF5;
+--color-border:#92999B;
+--color-background-box:#1D1C19;
 /* Text */
---color-text-primary: #272420;
---color-text-secondary: #0F0D0B;
---color-text-muted:#979595;
+--color-text-primary: #0F0F0F;
+--color-text-secondary: #6B6B6B;
 
 --shadow-text: 0 2px 12px rgba(0, 0, 0, 0.6);
 --shadow-text-soft: 0 1px 8px rgba(0, 0, 0, 0.35);
@@ -38,7 +34,7 @@
   html {
 
     scroll-behavior: smooth;
-  scroll-snap-type: y mandatory;
+  /* scroll-snap-type: y mandatory; */
 
   }
 

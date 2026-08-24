@@ -8,5 +8,7 @@ export interface FilterOption {
   type:
     | "gender"
     | "fragranceFamily"
-    | "season";
+    | "season"
+    | "brand"
+    | "category";
 }

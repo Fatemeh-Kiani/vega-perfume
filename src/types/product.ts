@@ -1,3 +1,22 @@
+import type { Collection } from "./collection";
+import type {
+  FragranceFamily,
+  Gender,
+  Season,
+} from "./fragrance";
+
+export type ProductImage = {
+  id: number;
+  url: string;
+  alt?: string;
+};
+
+export type ProductNotes = {
+  top?: string[];
+  heart?: string[];
+  base?: string[];
+};
+
 export interface Product {
   id: number;
 
@@ -11,21 +30,17 @@ export interface Product {
 
   subCategoryId?: number;
 
-  description: string;
+  description?: string;
 
   price: number;
 
-  stock: number;
-  image: string;
-  
-  hoverImage?: string;
+  currency: "USD";
 
-  isBestSeller?: boolean;
+  stock?: number;
 
-  gender:
-    |"women"
-    | "men"
-    | "unisex";
+  images: ProductImage[];
+
+  gender?: Gender[];
 
   concentration?: string;
 
@@ -33,19 +48,21 @@ export interface Product {
 
   country?: string;
 
-  season?: 
-    | "summer"
-    | "winter"
-    | "spring"
-    | "autumn";
+  seasons?: Season[];
 
-  fragranceFamily?: string;
+  fragranceFamilies?: FragranceFamily[];
 
   longevity?: string;
 
   sillage?: string;
 
-  createdAt: string;
+  collections?: Collection[];
 
-  updatedAt: string;
+  rating?: number;
+
+  reviewCount?: number;
+
+  createdAt?: string;
+
+  updatedAt?: string;
 }

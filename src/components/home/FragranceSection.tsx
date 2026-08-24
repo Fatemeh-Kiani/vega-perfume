@@ -1,9 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
-import {
-  ArrowLeft,
-  ArrowRight,
-} from "lucide-react";
+import { ArrowLeft, ArrowRight } from "lucide-react";
+import { Link as RouterLink } from "react-router-dom";
+
 import { getFragrances } from "../../services/fragranceService";
 
 type Fragrance = {
@@ -228,23 +227,10 @@ export default function FragranceSection() {
           lg:aspect-[16/7]
         "
       >
-<AnimatePresence mode="sync">
-  <motion.a
+  <AnimatePresence mode="sync">
+  <RouterLink
     key={active.label}
-    href={active.href}
-    initial={{
-      opacity: 0.92,
-    }}
-    animate={{
-      opacity: 1,
-    }}
-    exit={{
-      opacity: 0.92,
-    }}
-    transition={{
-      duration: 0.22,
-      ease: [0.22, 1, 0.36, 1],
-    }}
+    to={active.href}
     className="
       absolute
       inset-0
@@ -371,7 +357,7 @@ export default function FragranceSection() {
                 </motion.div>
               </AnimatePresence>
             </div>
-          </motion.a>
+          </RouterLink>
         </AnimatePresence>
 
         {/* =================================================
@@ -389,7 +375,7 @@ export default function FragranceSection() {
             gap-2
             sm:bottom-7
             sm:right-7
-            md:hidden
+            min-[1120px]:hidden
           "
         >
           <button
@@ -473,7 +459,7 @@ export default function FragranceSection() {
           hidden
           border-t
           border-text-primary/10
-          md:block
+          min-[1120px]:block
         "
       >
         <div
@@ -488,9 +474,10 @@ export default function FragranceSection() {
                 index === activeIndex;
 
               return (
-                <a
+                <RouterLink
                   key={fragrance.label}
-                  href={fragrance.href}
+                  to={fragrance.href}
+
                   onMouseEnter={() =>
                     setActiveIndex(index)
                   }
@@ -541,7 +528,7 @@ export default function FragranceSection() {
     `}
   />
 </span>
-                </a>
+                </RouterLink>
               );
             }
           )}
@@ -578,11 +565,11 @@ export default function FragranceSection() {
           border-t
           border-text-primary/10
           pt-4
-          md:hidden
+           min-[1120px]:hidden
         "
       >
-        <a
-          href={active.href}
+        <RouterLink
+          to={active.href}
           className="
             font-notoSerif
             text-[15px]
@@ -591,7 +578,7 @@ export default function FragranceSection() {
           "
         >
           {active.label}
-        </a>
+        </RouterLink>
 
         <span
           className="
@@ -644,8 +631,8 @@ export default function FragranceSection() {
           Seven families
         </span>
 
-        <a
-          href="/fragrances"
+        <RouterLink
+          to="/fragrances"
           className="
             group
             flex
@@ -673,7 +660,7 @@ export default function FragranceSection() {
               group-hover:bg-text-primary
             "
           />
-        </a>
+        </RouterLink>
       </motion.div>
     </section>
   );

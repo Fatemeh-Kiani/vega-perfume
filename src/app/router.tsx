@@ -77,4 +77,5 @@ export const router = createBrowserRouter([
       },
     ],
   },
-]);
+],
+);

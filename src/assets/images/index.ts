@@ -15,7 +15,7 @@ import versace from "./brands/versace.webp";
 import ysl from "./brands/ysl.webp";
 import aesop from "./brands/aesop.webp";
 import diptyque from "./brands/diptyque.webp";
-import givenchy from "./brands/Givenchy.webp";
+import givenchy from "./brands/givenchy.webp";
 import penhaligons from "./brands/penhaligons.webp";
 
 

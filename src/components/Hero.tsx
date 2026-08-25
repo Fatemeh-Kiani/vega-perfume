@@ -3,6 +3,8 @@ import {
   ArrowDown,
   ArrowUpRight,
 } from "lucide-react";
+import { Link as RouterLink } from "react-router-dom";
+
 
 import heroImage from "../assets/images/hero/hero.jpg";
 
@@ -379,8 +381,8 @@ export default function Hero() {
                 EXPLORE COLLECTION
             ================================================== */}
 
-<a
-  href="/products#filters"
+<RouterLink
+  to="/products#filters"
   className="
     group
     flex
@@ -419,18 +421,8 @@ export default function Hero() {
       group-hover:-translate-y-1
     "
   />
-</a>
+</RouterLink>
 
-              <ArrowUpRight
-                size={13}
-                strokeWidth={1}
-                className="
-                  transition-transform
-                  duration-500
-                  group-hover:translate-x-1
-                  group-hover:-translate-y-1
-                "
-              />
           </motion.div>
         </div>
       </div>

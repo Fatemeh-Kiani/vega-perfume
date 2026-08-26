@@ -242,7 +242,7 @@ export default function ProductCard({
                 text-[8px]
                 font-medium
                 uppercase
-                tracking-[0.22em]
+                tracking-[0.12em]
               "
             >
               Discover
@@ -304,7 +304,7 @@ export default function ProductCard({
                 text-[8px]
                 font-medium
                 uppercase
-                tracking-[0.22em]
+                tracking-[0.12em]
               "
             >
               + Bag

@@ -27,7 +27,7 @@ export default function WishlistPage() {
    */
 
   useEffect(() => {
-    let mounted = true;
+    let mounted = true
 
     async function loadWishlistProducts() {
       const data = await getProducts();
@@ -251,7 +251,7 @@ export default function WishlistPage() {
             w-full
             border-b
             border-border/20
-            bg-text-primary/95
+            bg-background-box
             text-[#FAF9F6]
           "
         >
@@ -768,7 +768,7 @@ export default function WishlistPage() {
                                 h-11
                                 items-center
                                 justify-center
-                                gap-2
+                                gap-1
                                 border
                                 border-text-primary
                                 bg-background-box
@@ -777,7 +777,7 @@ export default function WishlistPage() {
                                 text-[8px]
                                 font-medium
                                 uppercase
-                                tracking-[0.18em]
+                                tracking-[0.08em]
                                 text-background-main
                                 transition-all
                                 duration-300
@@ -812,7 +812,7 @@ export default function WishlistPage() {
                                 h-11
                                 items-center
                                 justify-center
-                                gap-2
+                                gap-1
                                 border
                                 border-l-0
                                 border-text-primary/20
@@ -822,7 +822,7 @@ export default function WishlistPage() {
                                 text-[8px]
                                 font-medium
                                 uppercase
-                                tracking-[0.18em]
+                                tracking-[0.08em]
                                 text-text-primary
                                 transition-all
                                 duration-300
@@ -856,7 +856,7 @@ export default function WishlistPage() {
                                 h-11
                                 items-center
                                 justify-center
-                                gap-2
+                                gap-1
                                 border
                                 border-t-0
                                 border-text-primary/20
@@ -866,7 +866,7 @@ export default function WishlistPage() {
                                 text-[8px]
                                 font-medium
                                 uppercase
-                                tracking-[0.18em]
+                                tracking-[0.12em]
                                 text-text-primary
                                 transition-all
                                 duration-300

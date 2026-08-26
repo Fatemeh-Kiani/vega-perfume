@@ -960,10 +960,7 @@ const selectedCount =
   uppercase
   tracking-[0.1em]
   text-[#55544D]
-  transition-all
-  duration-200
-  hover:border-border
-  hover:text-text-primary
+ 
 "
                 >
                   {filter.label}
@@ -975,7 +972,7 @@ const selectedCount =
                       text-text-secondary
                       transition-transform
                       duration-200
-                      group-hover:rotate-90
+                      group-hover:text-text-primary
                     "
                   />
                 </button>
@@ -1300,9 +1297,6 @@ const selectedCount =
             uppercase
             tracking-[0.1em]
             text-text-secondary
-            transition-all
-            duration-200
-            hover:text-text-primary
           "
         >
           {filter.label}
@@ -1311,7 +1305,7 @@ const selectedCount =
             size={10}
             strokeWidth={1.2}
             className="
-              text-[#8E8C82]
+              text-text-secondary/70
               transition-all
               duration-200
               group-hover:scale-110
@@ -1496,7 +1490,7 @@ const selectedCount =
         items-center
         justify-center
         border
-        border-[#302D27]/15
+        border-border/40
         bg-transparent
         font-roboto
         text-[9px]
@@ -1506,8 +1500,8 @@ const selectedCount =
         text-text-secondary
         transition-all
         duration-300
-        hover:border-border/50
-        hover:text-[#24241F]
+        hover:border-border/20
+        hover:text-text-primary/90
         active:scale-[0.98]
       "
     >

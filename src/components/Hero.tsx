@@ -449,7 +449,7 @@ export default function Hero() {
         }}
         className="
           absolute
-          bottom-12
+          bottom-6
           left-1/2
           z-40
           flex

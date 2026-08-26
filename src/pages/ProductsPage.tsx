@@ -6,7 +6,6 @@ import {
 } from "lucide-react";
 
 import {
-  useParams,
   useSearchParams,
 } from "react-router-dom";
 
@@ -25,15 +24,6 @@ export default function ProductsPage() {
   const [searchParams, setSearchParams] =
     useSearchParams();
 
-  const routeParams = useParams<{
-    gender?: string;
-    fragrance?: string;
-    season?: string;
-    brand?: string;
-    category?: string;
-    subcategory?: string;
-    collection?: string;
-  }>();
 
   const [products, setProducts] =
     useState<Product[]>([]);
@@ -82,11 +72,8 @@ export default function ProductsPage() {
 
       if (!mounted) return;
 
-      const filters =
-        parseProductFilters(
-          searchParams,
-          routeParams,
-        );
+const filters =
+  parseProductFilters(searchParams);
 
       const filteredProducts =
         filterProducts(
@@ -110,19 +97,10 @@ export default function ProductsPage() {
     return () => {
       mounted = false;
     };
-  }, [
-    searchParams,
-    routeParams.gender,
-    routeParams.fragrance,
-    routeParams.season,
-    routeParams.brand,
-    routeParams.category,
-    routeParams.subcategory,
-    routeParams.collection,
-  ]);
+}, [searchParams]);
 
   return (
-    <main className="min-h-screen bg-background-main text-[#1D1C19]">
+    <main className="min-h-screen bg-background-main text-text-primary/90">
 
       {/* ==================================================
           INTRO
@@ -145,27 +123,6 @@ export default function ProductsPage() {
 
           <div className="flex items-center gap-3">
 
-            <span
-              className="
-                h-px
-                w-10
-                bg-[#1D1C19]
-              "
-            />
-
-            <span
-              className="
-                font-roboto
-                text-[10px]
-                font-medium
-                uppercase
-                tracking-[0.24em]
-                text-[#77736B]
-              "
-            >
-              The collection
-            </span>
-
           </div>
 
           <div
@@ -179,7 +136,6 @@ export default function ProductsPage() {
               lg:justify-between
             "
           >
-
             <h1
               className="
                 font-notoSerif
@@ -193,7 +149,6 @@ export default function ProductsPage() {
             >
               Explore
             </h1>
-
             <div
               className="
                 max-w-[330px]
@@ -206,7 +161,7 @@ export default function ProductsPage() {
                   font-roboto
                   text-[12px]
                   leading-6
-                  text-[#77736B]
+                  text-text-secondary/60
                 "
               >
                 Discover fragrances and
@@ -227,7 +182,7 @@ export default function ProductsPage() {
                   className="
                     h-px
                     w-8
-                    bg-[#1D1C19]
+                    bg-text-primary
                   "
                 />
 
@@ -266,7 +221,7 @@ export default function ProductsPage() {
           sticky
           top-0
           z-[100]
-          bg-[#FAF9F6]/95
+          bg-[#FAF9F6]
           backdrop-blur-md
         "
       >
@@ -275,7 +230,7 @@ export default function ProductsPage() {
           <div
             className="
               border-y
-              border-[#1D1C19]/10
+              border-border/20
             "
           >
 
@@ -296,7 +251,7 @@ export default function ProductsPage() {
                 strokeWidth={1.2}
                 className="
                   shrink-0
-                  text-[#77736B]
+                  text-text-secondary
                 "
               />
 
@@ -317,9 +272,9 @@ export default function ProductsPage() {
                   font-roboto
                   text-[13px]
                   font-normal
-                  text-[#1D1C19]
+                  text-text-primary/90
                   outline-none
-                  placeholder:text-[#A6A198]
+                  placeholder:text-text-secondary/50
                   [&::-webkit-search-cancel-button]:appearance-none
                   [&::-webkit-search-decoration]:appearance-none
                 "
@@ -340,11 +295,11 @@ export default function ProductsPage() {
                     items-center
                     justify-center
                     border
-                    border-[#1D1C19]/15
-                    text-[#77736B]
+                    border-border/20
+                    text-text-secondary/40
                     transition-all
                     duration-200
-                    hover:text-[#1D1C19]
+                    hover:text-text-primary
                   "
                 >
                   <X
@@ -370,8 +325,8 @@ export default function ProductsPage() {
       <section
         className="
           border-b
-          border-[#1D1C19]/10
-          bg-[#1D1C19]
+          border-border/20
+          bg-background-box
           text-[#FAF9F6]
         "
       >
@@ -421,7 +376,7 @@ export default function ProductsPage() {
                 text-[9px]
                 uppercase
                 tracking-[0.2em]
-                text-white/65
+                text-white/45
               "
             >
               results

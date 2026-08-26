@@ -9,7 +9,7 @@ import {
   X,
 } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
-
+import { useWishlist } from "../../hooks/useWishlist";
 import { Link } from "react-router-dom";
 import { megaMenu } from "../../data/megaMenu";
 
@@ -50,6 +50,8 @@ export default function MobileHeader({
   setIsOpen,
   onSearch,
 }: MobileHeaderProps) {
+  const { wishlistIds } = useWishlist();
+
   const [activeSection, setActiveSection] =
     useState<MobileSection | null>(null);
 
@@ -689,49 +691,109 @@ return (
           </span>
         </Link>
 
-        {/* ACTIONS */}
 
-        <div
-          className="
-            flex
-            items-center
-            gap-4
-          "
-        >
-          <button
-            type="button"
-            aria-label="Search"
-            onClick={onSearch}
-            className="text-text-primary"
-          >
-            <Search
-              size={17}
-              strokeWidth={1.25}
-            />
-          </button>
+{/* ACTIONS */}
 
-          <button
-            type="button"
-            aria-label="Wishlist"
-            className="text-text-primary"
-          >
-            <Heart
-              size={17}
-              strokeWidth={1.25}
-            />
-          </button>
+<div
+  className="
+    flex
+    items-center
+    gap-4
+  "
+>
+  {/* SEARCH */}
 
-          <button
-            type="button"
-            aria-label="Cart"
-            className="text-text-primary"
-          >
-            <ShoppingBag
-              size={17}
-              strokeWidth={1.25}
-            />
-          </button>
-        </div>
+  <button
+    type="button"
+    aria-label="Search"
+    onClick={onSearch}
+    className="
+      relative
+      text-text-primary
+      transition-transform
+      duration-150
+      active:scale-[0.90]
+    "
+  >
+    <Search
+      size={17}
+      strokeWidth={1.25}
+    />
+  </button>
+
+  {/* WISHLIST */}
+
+  <Link
+    to="/wishlist"
+    aria-label={`Wishlist${wishlistIds.length > 0 ? `, ${wishlistIds.length} saved` : ""}`}
+    className="
+      relative
+      flex
+      items-center
+      justify-center
+      text-text-primary
+      transition-transform
+      duration-150
+      active:scale-[0.90]
+    "
+  >
+    <Heart
+      size={17}
+      strokeWidth={1.25}
+      className="
+        transition-all
+        duration-200
+      "
+    />
+
+    {/* COUNT */}
+
+    {wishlistIds.length > 0 && (
+      <span
+        className="
+          absolute
+          -right-[7px]
+          -top-[7px]
+          flex
+          min-h-[13px]
+          min-w-[13px]
+          items-center
+          justify-center
+          rounded-full
+          bg-text-primary
+          px-[3px]
+          font-roboto
+          text-[7px]
+          font-medium
+          leading-none
+          text-background-main
+        "
+      >
+        {wishlistIds.length > 99
+          ? "99+"
+          : wishlistIds.length}
+      </span>
+    )}
+  </Link>
+
+  {/* CART */}
+
+  <button
+    type="button"
+    aria-label="Cart"
+    className="
+      text-text-primary
+      transition-transform
+      duration-150
+      active:scale-[0.90]
+    "
+  >
+    <ShoppingBag
+      size={17}
+      strokeWidth={1.25}
+    />
+  </button>
+</div>
       </div>
 
       <div

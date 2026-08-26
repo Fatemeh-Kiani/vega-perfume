@@ -38,6 +38,20 @@ export default function HomeScrollController({
 
   const wasAtTop = useRef(false);
 
+  /*
+   * ==================================================
+   * TOUCH TRACKING
+   * ==================================================
+   */
+
+  const touchStartY = useRef<number | null>(
+    null
+  );
+
+  const touchStartX = useRef<number | null>(
+    null
+  );
+
   /* --------------------------------
      SHOW HOME
   -------------------------------- */
@@ -148,7 +162,9 @@ export default function HomeScrollController({
     home.addEventListener(
       "scroll",
       handleScroll,
-      { passive: true }
+      {
+        passive: true,
+      }
     );
 
     return () => {
@@ -157,7 +173,10 @@ export default function HomeScrollController({
         handleScroll
       );
     };
-  }, [homeRef, isHomeVisible]);
+  }, [
+    homeRef,
+    isHomeVisible,
+  ]);
 
   /* --------------------------------
      WHEEL CONTROL
@@ -172,7 +191,9 @@ export default function HomeScrollController({
       showHome();
     };
 
-    const handleWheel = (event: WheelEvent) => {
+    const handleWheel = (
+      event: WheelEvent
+    ) => {
       if (isAnimating.current) {
         event.preventDefault();
         return;
@@ -234,7 +255,9 @@ export default function HomeScrollController({
     window.addEventListener(
       "wheel",
       handleWheel,
-      { passive: false }
+      {
+        passive: false,
+      }
     );
 
     return () => {
@@ -246,6 +269,159 @@ export default function HomeScrollController({
       window.removeEventListener(
         "wheel",
         handleWheel
+      );
+    };
+  }, [
+    isHomeVisible,
+    homeRef,
+    homeY,
+  ]);
+
+  /* --------------------------------
+     TOUCH CONTROL
+  -------------------------------- */
+
+  useEffect(() => {
+    const handleTouchStart = (
+      event: TouchEvent
+    ) => {
+      if (isAnimating.current) return;
+
+      const touch =
+        event.touches[0];
+
+      if (!touch) return;
+
+      touchStartY.current =
+        touch.clientY;
+
+      touchStartX.current =
+        touch.clientX;
+    };
+
+    const handleTouchEnd = (
+      event: TouchEvent
+    ) => {
+      if (isAnimating.current) return;
+
+      if (
+        touchStartY.current === null ||
+        touchStartX.current === null
+      ) {
+        return;
+      }
+
+      const touch =
+        event.changedTouches[0];
+
+      if (!touch) return;
+
+      const endY =
+        touch.clientY;
+
+      const endX =
+        touch.clientX;
+
+      const deltaY =
+        endY -
+        touchStartY.current;
+
+      const deltaX =
+        endX -
+        touchStartX.current;
+
+      /*
+       * RESET
+       */
+
+      touchStartY.current = null;
+      touchStartX.current = null;
+
+      /*
+       * IGNORE HORIZONTAL SWIPES
+       */
+
+      if (
+        Math.abs(deltaX) >
+        Math.abs(deltaY)
+      ) {
+        return;
+      }
+
+      /*
+       * MINIMUM SWIPE DISTANCE
+       */
+
+      if (
+        Math.abs(deltaY) < 45
+      ) {
+        return;
+      }
+
+      /* --------------------------------
+         HERO → HOME
+         
+         Finger moves UP
+         deltaY is negative
+      -------------------------------- */
+
+      if (!isHomeVisible) {
+        if (deltaY < -45) {
+          showHome();
+        }
+
+        return;
+      }
+
+      const home = homeRef.current;
+
+      if (!home) return;
+
+      const isAtTop =
+        home.scrollTop <= 2;
+
+      /* --------------------------------
+         HOME → HERO
+         
+         Finger moves DOWN
+         deltaY is positive
+      -------------------------------- */
+
+      if (
+        isAtTop &&
+        deltaY > 45
+      ) {
+        showHero();
+
+        return;
+      }
+    };
+
+    window.addEventListener(
+      "touchstart",
+      handleTouchStart,
+      {
+        passive: true,
+      }
+    );
+
+    window.addEventListener(
+      "touchend",
+      handleTouchEnd,
+      {
+        passive: true,
+      }
+    );
+
+    return () => {
+      window.removeEventListener(
+        "touchstart",
+        handleTouchStart
+      );
+
+      window.removeEventListener(
+        "touchend",
+        handleTouchEnd
       );
     };
   }, [

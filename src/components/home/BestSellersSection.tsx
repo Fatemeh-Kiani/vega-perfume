@@ -1,9 +1,9 @@
 import { brands } from "../../data/brands";
 import { useEffect, useRef, useState } from "react";
-import { ArrowRight, Heart } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Link as RouterLink } from "react-router-dom";
 import { motion } from "motion/react";
-
+import ProductWishlistButton from "../product/ProductWishlistButton.tsx";
 import { getProducts } from "../../services/productService";
 import type { Product } from "../../types/product";
 
@@ -11,7 +11,7 @@ export default function BestSellers() {
   const viewportRef = useRef<HTMLDivElement>(null);
 
   const [products, setProducts] = useState<Product[]>([]);
-  const [savedProducts, setSavedProducts] = useState<number[]>([]);
+
 
   /*
    * =====================================================
@@ -41,19 +41,6 @@ export default function BestSellers() {
     };
   }, []);
 
-  /*
-   * =====================================================
-   * SAVE PRODUCT
-   * =====================================================
-   */
-
-  const toggleSave = (productId: number) => {
-    setSavedProducts((current) =>
-      current.includes(productId)
-        ? current.filter((id) => id !== productId)
-        : [...current, productId]
-    );
-  };
 
   /*
    * =====================================================
@@ -240,7 +227,6 @@ export default function BestSellers() {
           ================================================== */}
 
           {products.map((product, index) => {
-            const isSaved = savedProducts.includes(product.id);
 
             const brandName =
               brands.find(
@@ -395,43 +381,22 @@ export default function BestSellers() {
        </RouterLink>
 
 
-                  <button
-                    type="button"
-                    aria-label={
-                      isSaved
-                        ? `Remove ${product.name} from saved`
-                        : `Save ${product.name}`
-                    }
-                    aria-pressed={isSaved}
-                    onClick={() => toggleSave(product.id)}
-                    className="
-                      absolute
-                      right-4
-                      top-4
-                      z-30
-                      flex
-                      h-9
-                      w-9
-                      items-center
-                      justify-center
-                      bg-background-main/85
-                      backdrop-blur-sm
-                      transition-all
-                      duration-300
-                      hover:bg-background-main
-                      active:scale-95
-                    "
-                  >
-                    <Heart
-                      size={15}
-                      strokeWidth={1.2}
-                      className={
-                        isSaved
-                          ? "fill-text-primary text-text-primary"
-                          : "text-text-primary/60"
-                      }
-                    />
-                  </button>
+<ProductWishlistButton
+  productId={product.id}
+  productName={product.name}
+
+  className="
+    absolute
+    right-4
+    top-4
+    z-30
+    h-9
+    w-9
+    bg-background-main/85
+    backdrop-blur-sm
+    hover:bg-background-main
+  "
+/>
                 </div>
 
                 {/* ==================================================

@@ -31,13 +31,13 @@ function MenuLink({
         flex
         w-fit
         items-center
-        font-notoSerif
+        font-roboto
         text-[13px]
         font-normal
         leading-[1.25]
-        text-text-primary
+        text-text-secondary
         transition-colors
-- hover:text-text-primary/55
+- hover:text-text-primary/80
 
       "
     >

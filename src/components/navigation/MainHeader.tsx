@@ -1,8 +1,9 @@
 import { forwardRef } from "react";
 import { Link } from "react-router-dom";
-
+import AccountButton from "../navigation/actions/AccountButton";
+import WishlistButton from "./actions/WishlistButton";
+import CartButton from "../navigation/actions/CartButton";
 import TopBar from "./TopBar";
-import HeaderActions from "./HeaderActions";
 import MenuBar from "./MenuBar";
 
 type MainHeaderProps = {
@@ -78,14 +79,16 @@ const MainHeader = forwardRef<
                 VEGA
               </h1>
             </Link>
+{/* RIGHT — ACTIONS */}
 
-            {/* RIGHT — ACTIONS */}
+<div className="flex justify-end">
+  <div className="flex items-center gap-7">
+    <AccountButton />
+    <WishlistButton />
+    <CartButton />
+  </div>
+</div>
 
-            <div className="flex justify-end">
-              <HeaderActions
-      
-              />
-            </div>
           </div>
         </div>
 

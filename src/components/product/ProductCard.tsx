@@ -1,12 +1,10 @@
 import {
-  Heart,
   ShoppingBag,
 } from "lucide-react";
-import { useState } from "react";
 import { Link } from "react-router-dom";
-
 import { brands } from "../../data/brands";
 import type { Product } from "../../types/product";
+import ProductWishlistButton from "./ProductWishlistButton.tsx";
 
 type ProductCardProps = {
   product: Product;
@@ -15,7 +13,7 @@ type ProductCardProps = {
 export default function ProductCard({
   product,
 }: ProductCardProps) {
-  const [saved, setSaved] = useState(false);
+
 
   const primaryImage = product.images[0]?.url;
   const secondaryImage = product.images[1]?.url;
@@ -26,20 +24,6 @@ export default function ProductCard({
     (item) => item.id === product.brandId,
   );
 
-  /*
-   * ==================================================
-   * SAVE
-   * ==================================================
-   */
-
-  function handleSave(
-    event: React.MouseEvent<HTMLButtonElement>,
-  ) {
-    event.preventDefault();
-    event.stopPropagation();
-
-    setSaved((prev) => !prev);
-  }
 
   return (
     <article className="group w-full">
@@ -136,55 +120,10 @@ export default function ProductCard({
             md:group-hover:translate-x-[400%]
           "
         />
-
-        {/* ==================================================
-            SAVE
-        ================================================== */}
-
-        <button
-          type="button"
-          onClick={handleSave}
-          aria-label={
-            saved
-              ? `Remove ${product.name} from saved`
-              : `Save ${product.name}`
-          }
-          className="
-            absolute
-            right-3
-            top-3
-            z-20
-            flex
-            h-8
-            w-8
-            items-center
-            justify-center
-            rounded-full
-            border
-            border-border/20
-            bg-background-main
-            text-text-primary
-            transition-all
-            duration-300
-            active:scale-90
-            md:right-4
-            md:top-4
-            md:translate-y-[-6px]
-            md:opacity-0
-            md:group-hover:translate-y-0
-            md:group-hover:opacity-100
-          "
-        >
-          <Heart
-            size={15}
-            strokeWidth={1.2}
-            className={
-              saved
-                ? "fill-text-primary text-text-primary"
-                : "text-text-primary"
-            }
-          />
-        </button>
+<ProductWishlistButton
+  productId={product.id}
+  productName={product.name}
+/>
       </div>
 
       {/* ==================================================
@@ -275,7 +214,7 @@ export default function ProductCard({
               group/discover
               relative
               flex
-              h-11
+              h-9
               flex-1
               items-center
               justify-center
@@ -291,6 +230,8 @@ export default function ProductCard({
               hover:bg-background-soft
               active:scale-[0.97]
               active:opacity-80
+              sm:h-10
+              lg:h-11
             "
           >
             <span
@@ -301,7 +242,7 @@ export default function ProductCard({
                 text-[8px]
                 font-medium
                 uppercase
-                tracking-[0.3em]
+                tracking-[0.22em]
               "
             >
               Discover
@@ -336,7 +277,8 @@ export default function ProductCard({
             className="
               group/bag
               flex
-              h-11
+              h-9
+              flex-1
               w-[105px]
               shrink-0
               items-center
@@ -352,6 +294,8 @@ export default function ProductCard({
               ease-[cubic-bezier(0.22,1,0.36,1)]
               hover:bg-text-primary
               active:scale-[0.97]
+               sm:h-10
+               lg:h-11
             "
           >
             <span

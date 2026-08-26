@@ -5,7 +5,7 @@ export const megaMenu: MegaMenu[] = [
   {
     id: "perfumes",
     label: "Perfumes",
-    href: "/products/category/perfumes",
+    href: "/products?category=perfumes",
 
     sections: [
       {
@@ -16,55 +16,49 @@ export const megaMenu: MegaMenu[] = [
             label: "Floral",
             kind: "filter",
             value: "floral",
-            href: "/products/fragrance/floral",
+            href: "/products?fragrance=floral",
             image: Images.perfumes.floral,
           },
-
           {
             label: "Woody",
             kind: "filter",
             value: "woody",
-            href: "/products/fragrance/woody",
+            href: "/products?fragrance=woody",
             image: Images.perfumes.woody,
           },
-
           {
             label: "Fresh",
             kind: "filter",
             value: "fresh",
-            href: "/products/fragrance/fresh",
+            href: "/products?fragrance=fresh",
             image: Images.perfumes.fresh,
           },
-
           {
             label: "Fruity",
             kind: "filter",
             value: "fruity",
-            href: "/products/fragrance/fruity",
+            href: "/products?fragrance=fruity",
             image: Images.perfumes.fruity,
           },
-
           {
             label: "Citrus",
             kind: "filter",
             value: "citrus",
-            href: "/products/fragrance/citrus",
+            href: "/products?fragrance=citrus",
             image: Images.perfumes.citrus,
           },
-
           {
             label: "Amber",
             kind: "filter",
             value: "amber",
-            href: "/products/fragrance/amber",
+            href: "/products?fragrance=amber",
             image: Images.perfumes.amber,
           },
-
           {
             label: "Aquatic",
             kind: "filter",
             value: "aquatic",
-            href: "/products/fragrance/aquatic",
+            href: "/products?fragrance=aquatic",
             image: Images.perfumes.aquatic,
           },
         ],
@@ -78,23 +72,21 @@ export const megaMenu: MegaMenu[] = [
             label: "Women",
             kind: "filter",
             value: "women",
-            href: "/products/gender/women",
+            href: "/products?gender=women",
             image: Images.perfumes.women,
           },
-
           {
             label: "Men",
             kind: "filter",
             value: "men",
-            href: "/products/gender/men",
+            href: "/products?gender=men",
             image: Images.perfumes.men,
           },
-
           {
             label: "Unisex",
             kind: "filter",
             value: "unisex",
-            href: "/products/gender/unisex",
+            href: "/products?gender=unisex",
             image: Images.perfumes.unisex,
           },
         ],
@@ -108,31 +100,28 @@ export const megaMenu: MegaMenu[] = [
             label: "Summer",
             kind: "filter",
             value: "summer",
-            href: "/products/season/summer",
+            href: "/products?season=summer",
             image: Images.perfumes.summer,
           },
-
           {
             label: "Spring",
             kind: "filter",
             value: "spring",
-            href: "/products/season/spring",
+            href: "/products?season=spring",
             image: Images.perfumes.spring,
           },
-
           {
             label: "Autumn",
             kind: "filter",
             value: "autumn",
-            href: "/products/season/autumn",
+            href: "/products?season=autumn",
             image: Images.perfumes.autumn,
           },
-
           {
             label: "Winter",
             kind: "filter",
             value: "winter",
-            href: "/products/season/winter",
+            href: "/products?season=winter",
             image: Images.perfumes.winter,
           },
         ],
@@ -143,7 +132,7 @@ export const megaMenu: MegaMenu[] = [
   {
     id: "body",
     label: "Body & Bath",
-    href: "/products/category/body-bath",
+    href: "/products?category=body-bath",
 
     sections: [
       {
@@ -155,21 +144,19 @@ export const megaMenu: MegaMenu[] = [
             label: "Hand Soap",
             kind: "subcategory",
             value: "hand-soap",
-            href: "/products/subcategory/hand-soap",
+            href: "/products?subcategory=hand-soap",
           },
-
           {
             label: "Body Cream",
             kind: "subcategory",
             value: "body-cream",
-            href: "/products/subcategory/body-cream",
+            href: "/products?subcategory=body-cream",
           },
-
           {
             label: "Hand Lotion",
             kind: "subcategory",
             value: "hand-lotion",
-            href: "/products/subcategory/hand-lotion",
+            href: "/products?subcategory=hand-lotion",
           },
         ],
       },
@@ -183,21 +170,19 @@ export const megaMenu: MegaMenu[] = [
             label: "Face Lotion",
             kind: "subcategory",
             value: "face-lotion",
-            href: "/products/subcategory/face-lotion",
+            href: "/products?subcategory=face-lotion",
           },
-
           {
             label: "Face Mask",
             kind: "subcategory",
             value: "face-mask",
-            href: "/products/subcategory/face-mask",
+            href: "/products?subcategory=face-mask",
           },
-
           {
             label: "Face Scrub",
             kind: "subcategory",
             value: "face-scrub",
-            href: "/products/subcategory/face-scrub",
+            href: "/products?subcategory=face-scrub",
           },
         ],
       },
@@ -211,14 +196,13 @@ export const megaMenu: MegaMenu[] = [
             label: "Shampoo",
             kind: "subcategory",
             value: "shampoo",
-            href: "/products/subcategory/shampoo",
+            href: "/products?subcategory=shampoo",
           },
-
           {
             label: "Hair Mask",
             kind: "subcategory",
             value: "hair-mask",
-            href: "/products/subcategory/hair-mask",
+            href: "/products?subcategory=hair-mask",
           },
         ],
       },
@@ -228,7 +212,7 @@ export const megaMenu: MegaMenu[] = [
   {
     id: "home",
     label: "Home",
-    href: "/products/category/home",
+    href: "/products?category=home",
 
     sections: [
       {
@@ -239,23 +223,21 @@ export const megaMenu: MegaMenu[] = [
             label: "Incense",
             kind: "subcategory",
             value: "incense",
-            href: "/products/subcategory/incense",
+            href: "/products?subcategory=incense",
             image: Images.home.incense,
           },
-
           {
             label: "Room Spray",
             kind: "subcategory",
             value: "room-spray",
-            href: "/products/subcategory/room-spray",
+            href: "/products?subcategory=room-spray",
             image: Images.home.roomSpray,
           },
-
           {
             label: "Candles",
             kind: "subcategory",
             value: "candles",
-            href: "/products/subcategory/candles",
+            href: "/products?subcategory=candles",
             image: Images.home.candles,
           },
         ],
@@ -277,135 +259,119 @@ export const megaMenu: MegaMenu[] = [
             label: "Dior",
             kind: "brand",
             value: "dior",
-            href: "/products/brand/dior",
+            href: "/products?brand=dior",
             image: Images.brands.dior,
           },
-
           {
             label: "Chanel",
             kind: "brand",
             value: "chanel",
-            href: "/products/brand/chanel",
+            href: "/products?brand=chanel",
             image: Images.brands.chanel,
           },
-
           {
             label: "Tom Ford",
             kind: "brand",
             value: "tomford",
-            href: "/products/brand/tomford",
+            href: "/products?brand=tomford",
             image: Images.brands.tomford,
           },
-
           {
             label: "Byredo",
             kind: "brand",
             value: "byredo",
-            href: "/products/brand/byredo",
+            href: "/products?brand=byredo",
             image: Images.brands.byredo,
           },
-
           {
             label: "Amouage",
             kind: "brand",
             value: "amouage",
-            href: "/products/brand/amouage",
+            href: "/products?brand=amouage",
             image: Images.brands.amouage,
           },
-
           {
             label: "Jo Malone",
             kind: "brand",
             value: "jo-malone",
-            href: "/products/brand/jo-malone",
+            href: "/products?brand=jo-malone",
             image: Images.brands.joMalone,
           },
-
           {
             label: "Le Labo",
             kind: "brand",
             value: "le-labo",
-            href: "/products/brand/le-labo",
+            href: "/products?brand=le-labo",
             image: Images.brands.leLabo,
           },
-
           {
             label: "Hermès",
             kind: "brand",
             value: "hermes",
-            href: "/products/brand/hermes",
+            href: "/products?brand=hermes",
             image: Images.brands.hermes,
           },
-
           {
             label: "Prada",
             kind: "brand",
             value: "prada",
-            href: "/products/brand/prada",
+            href: "/products?brand=prada",
             image: Images.brands.prada,
           },
-
           {
             label: "Gucci",
             kind: "brand",
             value: "gucci",
-            href: "/products/brand/gucci",
+            href: "/products?brand=gucci",
             image: Images.brands.gucci,
           },
-
           {
             label: "Yves Saint Laurent",
             kind: "brand",
             value: "ysl",
-            href: "/products/brand/ysl",
+            href: "/products?brand=ysl",
             image: Images.brands.ysl,
           },
-
           {
             label: "Versace",
             kind: "brand",
             value: "versace",
-            href: "/products/brand/versace",
+            href: "/products?brand=versace",
             image: Images.brands.versace,
           },
-
           {
             label: "Aesop",
             kind: "brand",
             value: "aesop",
-            href: "/products/brand/aesop",
+            href: "/products?brand=aesop",
             image: Images.brands.aesop,
           },
-
           {
             label: "Maison Francis Kurkdjian",
             kind: "brand",
-            value: "mfk",
-            href: "/products/brand/mfk",
+            value: "maison-francis-kurkdjian",
+            href: "/products?brand=maison-francis-kurkdjian",
             image: Images.brands.mfk,
           },
-
           {
             label: "Diptyque",
             kind: "brand",
             value: "diptyque",
-            href: "/products/brand/diptyque",
+            href: "/products?brand=diptyque",
             image: Images.brands.diptyque,
           },
-
           {
             label: "Penhaligon's",
             kind: "brand",
             value: "penhaligons",
-            href: "/products/brand/penhaligons",
+            href: "/products?brand=penhaligons",
             image: Images.brands.penhaligons,
           },
-
           {
             label: "Givenchy",
             kind: "brand",
             value: "givenchy",
-            href: "/products/brand/givenchy",
+            href: "/products?brand=givenchy",
             image: Images.brands.givenchy,
           },
         ],
@@ -416,7 +382,7 @@ export const megaMenu: MegaMenu[] = [
   {
     id: "gifts",
     label: "Gifts",
-    href: "/products/category/gifts",
+    href: "/products?category=gifts",
 
     sections: [
       {
@@ -429,28 +395,25 @@ export const megaMenu: MegaMenu[] = [
             label: "Gift Sets",
             kind: "subcategory",
             value: "gift-sets",
-            href: "/products/subcategory/gift-sets",
+            href: "/products?subcategory=gift-sets",
           },
-
           {
             label: "For Her",
             kind: "collection",
             value: "for-her",
-            href: "/products/collection/for-her",
+            href: "/products?collection=for-her",
           },
-
           {
             label: "For Him",
             kind: "collection",
             value: "for-him",
-            href: "/products/collection/for-him",
+            href: "/products?collection=for-him",
           },
-
           {
             label: "Gift Guide",
             kind: "collection",
             value: "gift-guide",
-            href: "/products/collection/gift-guide",
+            href: "/products?collection=gift-guide",
           },
         ],
       },
@@ -465,21 +428,19 @@ export const megaMenu: MegaMenu[] = [
             label: "Room Spray",
             kind: "subcategory",
             value: "room-spray",
-            href: "/products/subcategory/room-spray",
+            href: "/products?subcategory=room-spray",
           },
-
           {
             label: "Incense",
             kind: "subcategory",
             value: "incense",
-            href: "/products/subcategory/incense",
+            href: "/products?subcategory=incense",
           },
-
           {
             label: "Candles",
             kind: "subcategory",
             value: "candles",
-            href: "/products/subcategory/candles",
+            href: "/products?subcategory=candles",
           },
         ],
       },

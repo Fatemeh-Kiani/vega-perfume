@@ -1,8 +1,6 @@
 import { forwardRef } from "react";
 import { Link } from "react-router-dom";
-import AccountButton from "../navigation/actions/AccountButton";
-import WishlistButton from "./actions/WishlistButton";
-import CartButton from "../navigation/actions/CartButton";
+import HeaderActions from "./actions/HeaderActions";
 import TopBar from "./TopBar";
 import MenuBar from "./MenuBar";
 
@@ -80,13 +78,8 @@ const MainHeader = forwardRef<
               </h1>
             </Link>
 {/* RIGHT — ACTIONS */}
-
 <div className="flex justify-end">
-  <div className="flex items-center gap-7">
-    <AccountButton />
-    <WishlistButton />
-    <CartButton />
-  </div>
+  <HeaderActions />
 </div>
 
           </div>

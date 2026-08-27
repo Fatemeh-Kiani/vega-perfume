@@ -1,14 +1,13 @@
 import { useEffect, useState } from "react";
 import {
-  ArrowDown,
   Search,
   X,
 } from "lucide-react";
+import HeaderActions from "../components/navigation/actions/HeaderActions";
 
 import {
   useSearchParams,
 } from "react-router-dom";
-
 import Footer from "../components/Footer/Footer";
 import ProductFilter from "../components/product/ProductFilter/ProductFilter";
 import ProductGrid from "../components/product/ProductGrid";
@@ -23,7 +22,6 @@ import type { Product } from "../types/product";
 export default function ProductsPage() {
   const [searchParams, setSearchParams] =
     useSearchParams();
-
 
   const [products, setProducts] =
     useState<Product[]>([]);
@@ -108,15 +106,15 @@ const filters =
 
       <section
         className="
-          px-5
+          px-4
           pb-8
-          pt-24
-          sm:px-6
+          pt-8
+          sm:px-5
           sm:pb-10
-          sm:pt-28
-          lg:px-8
-          lg:pb-14
-          lg:pt-36
+          sm:pt-18
+          lg:px-5
+          lg:pb-10
+          lg:pt-18
         "
       >
         <div className="layout-container">
@@ -161,49 +159,13 @@ const filters =
                   font-roboto
                   text-[12px]
                   leading-6
-                  text-text-secondary/60
+                  text-text-muted
                 "
               >
                 Discover fragrances and
                 everyday rituals selected
                 with intention.
               </p>
-
-              <div
-                className="
-                  mt-5
-                  flex
-                  items-center
-                  gap-3
-                "
-              >
-
-                <span
-                  className="
-                    h-px
-                    w-8
-                    bg-text-primary
-                  "
-                />
-
-                <span
-                  className="
-                    font-roboto
-                    text-[9px]
-                    font-medium
-                    uppercase
-                    tracking-[0.2em]
-                  "
-                >
-                  Browse collection
-                </span>
-
-                <ArrowDown
-                  size={12}
-                  strokeWidth={1.2}
-                />
-
-              </div>
 
             </div>
 
@@ -245,7 +207,15 @@ const filters =
                 sm:px-2
               "
             >
-
+<div
+className="
+flex
+min-w-0
+flex-1
+items-center
+gap-3
+"
+>
               <Search
                 size={17}
                 strokeWidth={1.2}
@@ -308,7 +278,18 @@ const filters =
                   />
                 </button>
               )}
+</div>
+<div className="shrink-0">
+  {/* MOBILE ACTIONS */}
+  <div className="sm:hidden">
+    <HeaderActions variant="mobile" />
+  </div>
 
+  {/* DESKTOP ACTIONS */}
+  <div className="hidden sm:block">
+    <HeaderActions variant="desktop" />
+  </div>
+</div>
             </div>
 
             <ProductFilter />
@@ -327,7 +308,7 @@ const filters =
           border-b
           border-border/20
           bg-background-box
-          text-[#FAF9F6]
+          text-background-soft
         "
       >
         <div

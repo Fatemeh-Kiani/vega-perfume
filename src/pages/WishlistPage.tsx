@@ -95,47 +95,18 @@ export default function WishlistPage() {
       <section
         className="
           layout-container
-          px-5
-          pb-12
-          pt-28
-          sm:px-6
-          sm:pb-16
-          sm:pt-32
-          lg:px-8
-          lg:pb-20
-          lg:pt-40
+          px-4
+          pb-8
+          pt-8
+          sm:px-5
+          sm:pb-10
+          sm:pt-18
+          lg:px-5
+          lg:pb-10
+          lg:pt-18
         "
       >
-        {/* EYEBROW */}
 
-        <div
-          className="
-            flex
-            items-center
-            gap-3
-          "
-        >
-          <span
-            className="
-              h-px
-              w-10
-              bg-text-primary
-            "
-          />
-
-          <span
-            className="
-              font-roboto
-              text-[9px]
-              font-medium
-              uppercase
-              tracking-[0.24em]
-              text-text-muted
-            "
-          >
-            Your collection
-          </span>
-        </div>
 
         {/* TITLE + DESCRIPTION */}
 
@@ -186,34 +157,6 @@ export default function WishlistPage() {
               collected in one place.
             </p>
 
-            <div
-              className="
-                mt-5
-                flex
-                items-center
-                gap-3
-              "
-            >
-              <span
-                className="
-                  h-px
-                  w-7
-                  bg-text-primary/30
-                "
-              />
-
-              <span
-                className="
-                  font-roboto
-                  text-[8px]
-                  font-medium
-                  uppercase
-                  tracking-[0.2em]
-                "
-              >
-                Saved fragrances
-              </span>
-            </div>
           </div>
         </div>
       </section>
@@ -252,7 +195,7 @@ export default function WishlistPage() {
             border-b
             border-border/20
             bg-background-box
-            text-[#FAF9F6]
+            text-background-soft
           "
         >
           <div
@@ -816,7 +759,7 @@ export default function WishlistPage() {
                                 border
                                 border-l-0
                                 border-text-primary/20
-                                bg-background-main
+                                bg-background-pink
                                 px-4
                                 font-roboto
                                 text-[8px]
@@ -826,7 +769,7 @@ export default function WishlistPage() {
                                 text-text-primary
                                 transition-all
                                 duration-300
-                                hover:bg-background-soft
+                                hover:bg-background-main
                                 active:scale-[0.96]
                                 active:opacity-90
                                 sm:h-12

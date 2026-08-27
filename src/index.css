@@ -12,9 +12,10 @@
 /* Background */
 --color-background-main: #FAF9F6; 
 --color-background-soft: #F5F5EE;
+--color-background-pink:#F7EEEE;
 --color-border:#92999B;
 --color-background-box:#242424;
-/* Text F7EEEE صورتی */
+/* Text   */
 --color-text-primary: #0F0F0F;
 --color-text-secondary: #6B6B6B;
 
@@ -70,5 +71,4 @@ html,
 body {
 
   scroll-behavior: smooth;
-
 }

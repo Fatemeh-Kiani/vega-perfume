@@ -1,10 +1,8 @@
 import { motion } from "motion/react";
 import {
-  Heart,
   Search,
-  ShoppingBag,
 } from "lucide-react";
-import { useWishlist } from "../../hooks/useWishlist";
+import HeaderActions from "../navigation/actions/HeaderActions";
 import { Link } from "react-router-dom";
 import { megaMenu } from "../../data/megaMenu";
 import MegaMenu from "./mega-menu/MegaMenu";
@@ -24,7 +22,6 @@ export default function CompactHeader({
   setActiveMenu,
   onSearch,
 }: CompactHeaderProps) {
-  const { wishlistIds } = useWishlist();
   return (
     <motion.header
       initial={{
@@ -230,139 +227,19 @@ export default function CompactHeader({
           })}
         </nav>
 
-        {/* ==================================================
-            RIGHT ACTIONS
-        ================================================== */}
+{/* ==================================================
+    RIGHT ACTIONS
+================================================== */}
 
-        <div
-          className="
-            ml-auto
-            flex
-            items-center
-            gap-7
-          "
-        >
-          {/* WISHLIST */}
-
- {/* WISHLIST */}
-
-<Link
-  to="/wishlist"
-  aria-label={`Wishlist${
-    wishlistIds.length > 0
-      ? `, ${wishlistIds.length} saved`
-      : ""
-  }`}
+<div
   className="
-    group
-    relative
+    ml-auto
     flex
     items-center
-    gap-2
-    text-text-primary/65
-    transition-all
-    duration-300
-    hover:text-text-primary
-    active:scale-[0.94]
   "
 >
-  <span className="relative">
-    <Heart
-      size={16}
-      strokeWidth={1.25}
-      className="
-        transition-transform
-        duration-300
-        group-hover:scale-105
-      "
-    />
-
-    {/* COUNT */}
-
-    {wishlistIds.length > 0 && (
-      <span
-        className="
-          absolute
-          -right-[8px]
-          -top-[7px]
-          flex
-          min-h-[13px]
-          min-w-[13px]
-          items-center
-          justify-center
-          rounded-full
-          bg-text-primary
-          px-[3px]
-          font-roboto
-          text-[7px]
-          font-medium
-          leading-none
-          text-background-main
-        "
-      >
-        {wishlistIds.length > 99
-          ? "99+"
-          : wishlistIds.length}
-      </span>
-    )}
-  </span>
-
-  <span
-    className="
-      hidden
-      font-roboto
-      text-[8px]
-      font-medium
-      uppercase
-      tracking-[0.16em]
-      lg:block
-    "
-  >
-    Save
-  </span>
-</Link>
-
-          {/* CART */}
-
-          <button
-            type="button"
-            aria-label="Cart"
-            className="
-              group
-              flex
-              items-center
-              gap-2
-              text-text-primary/65
-              transition-colors
-              duration-300
-              hover:text-text-primary
-            "
-          >
-            <ShoppingBag
-              size={16}
-              strokeWidth={1.25}
-              className="
-                transition-transform
-                duration-300
-                group-hover:scale-105
-              "
-            />
-
-            <span
-              className="
-                hidden
-                font-roboto
-                text-[8px]
-                font-medium
-                uppercase
-                tracking-[0.16em]
-                lg:block
-              "
-            >
-              Cart
-            </span>
-          </button>
-        </div>
+  <HeaderActions variant="desktop" />
+</div>
       </div>
 
       {/* ==================================================

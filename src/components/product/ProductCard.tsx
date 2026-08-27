@@ -5,6 +5,8 @@ import { Link } from "react-router-dom";
 import { brands } from "../../data/brands";
 import type { Product } from "../../types/product";
 import ProductWishlistButton from "./ProductWishlistButton.tsx";
+import { useCart } from "../../hooks/useCart";
+import { useState } from "react";
 
 type ProductCardProps = {
   product: Product;
@@ -14,7 +16,8 @@ export default function ProductCard({
   product,
 }: ProductCardProps) {
 
-
+const { addToCart } = useCart();
+const [added, setAdded] = useState(false);
   const primaryImage = product.images[0]?.url;
   const secondaryImage = product.images[1]?.url;
 
@@ -273,7 +276,15 @@ export default function ProductCard({
           {/* ADD TO BAG */}
 
           <button
-            type="button"
+  type="button"
+  onClick={() => {
+    addToCart(product.id);
+    setAdded(true);
+    window.setTimeout(() => {
+      setAdded(false);
+    }, 500);
+  }}
+            
             className="
               group/bag
               flex
@@ -307,7 +318,7 @@ export default function ProductCard({
                 tracking-[0.12em]
               "
             >
-              + Bag
+             {added ? "Added" : "+ Bag"}
             </span>
 
             <ShoppingBag

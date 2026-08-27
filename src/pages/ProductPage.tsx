@@ -15,7 +15,7 @@ import {
   Link,
   useParams,
 } from "react-router-dom";
-
+import { useCart } from "../hooks/useCart";
 import { useState } from "react";
 
 import { products } from "../data/products";
@@ -28,11 +28,13 @@ export default function ProductPage() {
 
   const [saved, setSaved] = useState(false);
   const [activeImage, setActiveImage] = useState(0);
-
+const [added, setAdded] = useState(false);
   const product = products.find(
     (item) => item.slug === slug,
   );
-
+const {
+  addToCart,
+} = useCart();
   /*
    * ==================================================
    * PRODUCT NOT FOUND
@@ -835,6 +837,14 @@ export default function ProductPage() {
 
             <motion.button
               type="button"
+              onClick={() => 
+                {addToCart(product.id);
+                setAdded(true);
+              setTimeout(() => {
+                setAdded(false);
+                }, 500);
+              }}
+             
               whileHover={{
                 backgroundColor:
                   "#0F0F0F",
@@ -864,7 +874,7 @@ export default function ProductPage() {
                 duration-150
               "
             >
-              Add to bag
+              {added ? "Added" : "Add to bag"}
 
               <ShoppingBag
                 size={13}

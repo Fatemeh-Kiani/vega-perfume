@@ -31,7 +31,7 @@ const { itemCount } = useCart();
         className="
           flex
           items-center
-          gap-4
+          gap-3
         "
       >
 

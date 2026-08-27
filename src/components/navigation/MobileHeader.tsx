@@ -643,6 +643,13 @@ return (
           justify-between
         "
       >
+        <div
+          className="
+
+    flex
+    items-center
+    gap-1
+  ">
         {/* MENU */}
 
         <button
@@ -663,6 +670,30 @@ return (
             strokeWidth={1.25}
           />
         </button>
+        {/* SEARCH */}
+
+  <button
+    type="button"
+    onClick={onSearch}
+    aria-label="Search"
+    className="
+      flex
+      h-10
+      w-10
+      items-center
+      justify-end
+      text-text-primary
+      transition-transform
+      duration-150
+      active:scale-[0.90]
+    "
+  >
+    <Search
+      size={18}
+      strokeWidth={1.25}
+    />
+  </button>
+</div>
 
         {/* VEGA */}
 
@@ -690,36 +721,7 @@ return (
         </Link>
 {/* ACTIONS */}
 
-<div
-  className="
-    flex
-    items-center
-    gap-4
-  "
->
-  {/* SEARCH */}
-
-  <button
-    type="button"
-    onClick={onSearch}
-    aria-label="Search"
-    className="
-      flex
-      h-10
-      w-10
-      items-center
-      justify-end
-      text-text-primary
-      transition-transform
-      duration-150
-      active:scale-[0.90]
-    "
-  >
-    <Search
-      size={18}
-      strokeWidth={1.25}
-    />
-  </button>
+<div>
 
   {/* ACTIONS */}
 

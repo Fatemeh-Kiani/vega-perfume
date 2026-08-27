@@ -8,6 +8,7 @@ import HeaderActions from "../components/navigation/actions/HeaderActions";
 import {
   useSearchParams,
 } from "react-router-dom";
+
 import Footer from "../components/Footer/Footer";
 import ProductFilter from "../components/product/ProductFilter/ProductFilter";
 import ProductGrid from "../components/product/ProductGrid";
@@ -183,8 +184,7 @@ const filters =
           sticky
           top-0
           z-[100]
-          bg-[#FAF9F6]
-          backdrop-blur-md
+          bg-background-main
         "
       >
         <div className="layout-container">
@@ -193,6 +193,7 @@ const filters =
             className="
               border-y
               border-border/20
+              bg-background-main
             "
           >
 

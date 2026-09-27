@@ -10,6 +10,7 @@ import WishlistPage from "../pages/WishlistPage";
 import CartPage from "../pages/CartPage";
 import PaymentPage from "../pages/PaymentPage";
 import PaymentSuccessPage from "../pages/PaymentSuccessPage";
+
 export const router = createBrowserRouter([
   {
     path: "/",

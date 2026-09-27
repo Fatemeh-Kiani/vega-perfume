@@ -222,7 +222,7 @@ export default function FragranceSection() {
           relative
           aspect-[4/3]
           overflow-hidden
-          bg-[#E8E3DB]
+          bg-background-soft
           sm:aspect-[16/8]
           lg:aspect-[16/7]
         "
